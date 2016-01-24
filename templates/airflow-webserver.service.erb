@@ -1,0 +1,23 @@
+[Unit]
+Description= Airflow webserver
+Wants=basic.target
+After=basic.target network.target
+
+[Service]
+PIDFile = <%= @run_folder %>/airflow_webserver.pid
+ExecStart=/usr/bin/gunicorn -w <%= @gunicorn_workers %> -t 120 -b <%= @web_server_host %>:<%= @web_server_port %> airflow.www.app:cached_app()
+ExecReload=/bin/kill -HUP $MAINPID
+Environment="AIRFLOW_HOME=<%= @home_folder %>"
+KillMode=process
+Restart=on-failure
+RestartSec=15s
+User=<%= @user %>
+Group=<%= @group %>
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+
