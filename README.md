@@ -26,7 +26,7 @@ This module has been tested against airflow versions: 1.5.2, 1.6.2
 ## Setup
 
 ### Limitations
-This module does not initializes the airflow database schema - you can do so by executing:
+This module does not initialize the airflow database schema - you can do so by executing:
 ```
 airflow initdb
 ```
