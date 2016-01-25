@@ -12,12 +12,14 @@
 # [*log_folder*]             
 #  The folder where airflow's logs are located, defaults to `/var/log/airflow`.
 # [*run_folder*]
-#  The folder where airflow's pid file is located, defaults to `/var/run/airflow`.
+#  The folder where airflow's pid file is located,
+#  defaults to `/var/run/airflow`.
 ###### Core settings ######
 # [*home_folder*]
 #   The home folder for airflow, defaults to `/opt/airflow`.
 # [*dags_folder*]
-#   The folder where your airflow pipelines live, defaults to `/opt/airflow/dags`.
+#   The folder where your airflow pipelines live,
+#   defaults to `/opt/airflow/dags`.
 # [*s3_log_folder*]
 #   An S3 location can be provided for log backups
 #   For S3, use the full URL to the base folder (starting with "s3://...").
@@ -26,13 +28,15 @@
 # [*sql_alchemy_conn*]
 #   The SQLAlchemy connection string to the metadata database.
 # [*parallelism*]
-#   The amount of parallelism as a setting to the executor, defaults to `32`.             
+#   The amount of parallelism as a setting to the executor,
+#   defaults to `32`.             
 # [*dag_concurrency*]
 #   The number of task instances allowed to run concurrently by the scheduler.
 # [*max_active_runs_per_dag*]
 #   The maximum number of active DAG runs per DAG.
 # [*load_examples*]
-#   Whether to load the examples that ship with airflow, default to `true`.          
+#   Whether to load the examples that ship with airflow,
+#   default to `true`.          
 # [*plugins_folder*]
 #   Where your Airflow plugins are stored, defaults to `/opt/airflow/plugins`.
 # [*fernet_key*]              
@@ -63,7 +67,8 @@
 # [*auth_backend*]
 #   Airflow Authentication Backend, for example LDAP.
 # [*filter_by_owner*]
-#   Filter the list of dags by owner name (requires authentication to be enabled).
+#   Filter the list of dags by owner name
+#   (requires authentication to be enabled).
 ###### Mail settings ######
 # [*smtp_host*]
 #   Smtp host, defaults to `localhost`.
@@ -117,7 +122,7 @@
 # Copyright 2016 SimilarWeb.
 #
 class airflow (
-	# {Params}
+  # {Params}
   # Airflow service settings
   $service_ensure          = $airflow::params::service_ensure,
   $service_enable          = $airflow::params::service_enable,
@@ -127,23 +132,23 @@ class airflow (
   $package_name            = $airflow::params::package_name,
 
   # User and group settings
-  $user 	                 = $airflow::params::user,
-  $group 	                 = $airflow::params::group,
+  $user                    = $airflow::params::user,
+  $group                   = $airflow::params::group,
   $user_home_folder        = $airflow::params::user_home_folder,
-  $shell 		               = $airflow::params::shell,
+  $shell                   = $airflow::params::shell,
   $folders_mode            = $airflow::params::folders_mode,
   $gid                     = $airflow::params::gid,
-  $uid                     = $airflow::params::uid,  
+  $uid                     = $airflow::params::uid,
 
   # General settings
-  $log_folder 	           = $airflow::params::log_folder,
-  $run_folder 		         = $airflow::params::run_folder,
+  $log_folder              = $airflow::params::log_folder,
+  $run_folder              = $airflow::params::run_folder,
   $systemd_service_folder  = $airflow::params::systemd_service_folder,
 
   # Airflow.cfg file
   ## Core settings
-  $home_folder 	           = $airflow::params::home_folder,
-  $dags_folder 	           = $airflow::params::dags_folder,
+  $home_folder             = $airflow::params::home_folder,
+  $dags_folder             = $airflow::params::dags_folder,
   $s3_log_folder           = $airflow::params::s3_log_folder,
   $executor                = $airflow::params::executor,
   $sql_alchemy_conn        = $airflow::params::sql_alchemy_conn,
@@ -232,8 +237,11 @@ class airflow (
   validate_bool($donot_pickle)
 
   # Module compatibility check
-  if ! ($::operatingsystem in ['RedHat', 'CentOS'] and $::operatingsystemmajrelease == '7') {
-    fail("Module is not compatible with ${::operatingsystem} Release: ${::operatingsystemmajrelease}")
+  if ! ($::operatingsystem in ['RedHat', 'CentOS']
+    and $::operatingsystemmajrelease == '7')
+  {
+      fail("Module is not compatible with
+       ${::operatingsystem} Release: ${::operatingsystemmajrelease}")
   }
 
   include airflow::config,

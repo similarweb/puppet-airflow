@@ -18,24 +18,25 @@ class airflow::config inherits airflow {
   }
   # Create airflow base home folders
   file { $airflow::home_folder:
-    ensure => directory,
+    ensure  => directory,
     owner   => $airflow::user,
     group   => $airflow::group,
     mode    => $airflow::folders_mode,
-    require => Python::Pip["$airflow::package_name"],
+    require => Python::Pip[$airflow::package_name],
     recurse => true
   }
   # Create airflow folders
-  $airflow_folders = [ 
-                    $airflow::log_folder,$airflow::run_folder,      
-                    $airflow::dags_folder,$airflow::plugins_folder
-                     ]
+  $airflow_folders =
+  [
+    $airflow::log_folder,$airflow::run_folder,
+    $airflow::dags_folder,$airflow::plugins_folder
+  ]
   file { $airflow_folders:
     ensure  => directory,
-    owner   => "${airflow::user}",
-    group   => "${airflow::group}",
+    owner   => $airflow::user,
+    group   => $airflow::group,
     mode    => $airflow::folders_mode,
-    require => File["$airflow::home_folder"]
+    require => File[$airflow::home_folder]
   }
   # Set the AIRFLOW_HOME environment variable on the server
   file { "${airflow::user_home_folder}/.bash_profile":
@@ -43,9 +44,9 @@ class airflow::config inherits airflow {
   }
   # Setup airflow.cfg configuration file
   file { "${airflow::home_folder}/airflow.cfg":
-    ensure   => 'file',
-    content  => template("${module_name}/airflow.cfg.erb"),
-    mode     => '0755',
-    require  =>  Python::Pip["$airflow::package_name"]
+    ensure  => 'file',
+    content => template("${module_name}/airflow.cfg.erb"),
+    mode    => '0755',
+    require =>  Python::Pip[$airflow::package_name]
   }
 }
