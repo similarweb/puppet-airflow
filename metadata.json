@@ -1,6 +1,6 @@
 {
   "name": "similarweb-airflow",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "SimilarWeb",
   "summary": "Airflow is a system to programmatically author, schedule and monitor data pipelines.",
   "license": "BSD-2-Clause-FreeBSD",
