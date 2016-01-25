@@ -14,7 +14,7 @@
     "rhel"
   ],
     "operatingsystem_support": [
-    { "operatingsystem":"RedHat", "operatingsystemrelease":  "7.0"  }
+    { "operatingsystem":"RedHat", "operatingsystemrelease":  ["7.0"] }
   ],
   "requirements": [
     {
@@ -22,7 +22,7 @@
       "version_requirement": ">=3.8.2 < 4.0.0"
     }
   ],
-  "dependencies": [ 
+  "dependencies": [
     {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
     {"name":"stankevich-python","version_requirement":">= 1.9.8"},
     {"name":"camptocamp-systemd","version_requirement":">= 0.2.2"}
