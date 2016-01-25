@@ -47,12 +47,13 @@ The module has been tested on CentOS 7
 
 Please refer to airflow [installation][3] before using this module.
 
-### Setup Requirements 
+### Setup Requirements
 
 airflow module depends on the following puppet modules:
 
 * puppetlabs-stdlib >= 1.0.0
 * stankevich-python >= 1.9.8
+* camptocamp-systemd >= 0.2.2
 
 ### Beginning with airflow
 
@@ -60,7 +61,7 @@ Install this module via any of these approaches:
 
 * [librarian-puppet][4]
 * [git-submodule][5]
-* `puppet module install airflow` 
+* `puppet module install similarweb-airflow`
 
 ## Usage
 
@@ -69,7 +70,7 @@ Install this module via any of these approaches:
 #### Install airflow 1.6.2 to /usr/local/airflow
 
 ```puppet
-class { 'airflow': 
+class { 'airflow':
           version => '1.6.2',
           home_folder => '/usr/local/airflow'
       }

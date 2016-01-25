@@ -17,7 +17,7 @@ class airflow::config inherits airflow {
     gid        => $airflow::group
   }
   # Create airflow base home folders
-	file { $airflow::home_folder:
+  file { $airflow::home_folder:
     ensure => directory,
     owner   => $airflow::user,
     group   => $airflow::group,
@@ -46,10 +46,6 @@ class airflow::config inherits airflow {
     ensure   => 'file',
     content  => template("${module_name}/airflow.cfg.erb"),
     mode     => '0755',
-    notify   =>  [ Service["airflow-worker"] ,
-                   Service["airflow-scheduler"],
-                   Service["airflow-webserver"]
-                 ],
     require  =>  Python::Pip["$airflow::package_name"]
   }
 }
