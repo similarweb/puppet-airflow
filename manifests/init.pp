@@ -216,8 +216,15 @@ class airflow (
   validate_absolute_path($plugins_folder)
 
   validate_integer($folders_mode)
-  validate_integer($gid)
-  validate_integer($uid)
+
+  if $gid != undef {
+    validate_integer($gid)
+  }
+
+  if $uid != undef {
+    validate_integer($uid)
+  }
+
   validate_integer($parallelism)
   validate_integer($dag_concurrency)
   validate_integer($max_active_runs_per_dag)
