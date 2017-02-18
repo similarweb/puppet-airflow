@@ -9,7 +9,7 @@
 # [*package_name*]
 #   Package name, defaults to `airflow`.
 ###### General settings ######
-# [*log_folder*]             
+# [*log_folder*]
 #  The folder where airflow's logs are located, defaults to `/var/log/airflow`.
 # [*run_folder*]
 #  The folder where airflow's pid file is located,
@@ -23,23 +23,23 @@
 # [*s3_log_folder*]
 #   An S3 location can be provided for log backups
 #   For S3, use the full URL to the base folder (starting with "s3://...").
-# [*executor*]  
-#   The executor class that airflow should use, defaults to `CeleryExecutor`.   
+# [*executor*]
+#   The executor class that airflow should use, defaults to `CeleryExecutor`.
 # [*sql_alchemy_conn*]
 #   The SQLAlchemy connection string to the metadata database.
 # [*parallelism*]
 #   The amount of parallelism as a setting to the executor,
-#   defaults to `32`.             
+#   defaults to `32`.
 # [*dag_concurrency*]
 #   The number of task instances allowed to run concurrently by the scheduler.
 # [*max_active_runs_per_dag*]
 #   The maximum number of active DAG runs per DAG.
 # [*load_examples*]
 #   Whether to load the examples that ship with airflow,
-#   default to `true`.          
+#   default to `true`.
 # [*plugins_folder*]
 #   Where your Airflow plugins are stored, defaults to `/opt/airflow/plugins`.
-# [*fernet_key*]              
+# [*fernet_key*]
 #   Secret key to save connection passwords in the db.
 # [*donot_pickle*]
 #   Whether to disable pickling dags.
@@ -75,17 +75,17 @@
 # [*smtp_starttls*]
 #   Use tls for smtp, defaults to `true`.
 # [*smtp_user*]
-#   Smtp user, defaults to `airflow`.   
-# [*smtp_port*]           
+#   Smtp user, defaults to `airflow`.
+# [*smtp_port*]
 #   Smtp port, defaults to `25`.
 # [*smtp_password*]
 #   Smtp password, defaults to `airflow`.
 # [*smtp_mail_from*]
 #   Airflow from email address, defaults to `airflow@airflow.com`.
 ###### Celery settings ######
-# [*celery_app_name*]         
+# [*celery_app_name*]
 #   The app name that will be used by celery.
-# [*celeryd_concurrency*]     
+# [*celeryd_concurrency*]
 #   The concurrency that will be used when starting workers with the
 #   "airflow worker" command.
 # [*worker_log_server_port*]
@@ -95,7 +95,7 @@
 # [*broker_url*]
 #   The celery broker URL.
 # [*celery_result_backend*]
-#   The celery result backend setting.   
+#   The celery result backend setting.
 # [*flower_port*]
 #   Celery flower is a sweet UI for celery.
 # [*default_queue*]
@@ -104,21 +104,21 @@
 # [*job_heartbeat_sec*]
 #   Task instances listen for external kill signal (when you clear tasks
 #   from the CLI or the UI), this defines the frequency at which they should
-#   listen (in seconds). 
+#   listen (in seconds).
 # [*scheduler_heartbeat_sec*]
 #   The scheduler constantly tries to trigger new tasks (look at the
 #   scheduler section in the docs for more information). This defines
 #   how often the scheduler should run (in seconds).
 ###### Puppet hashes ######
 # [*statsd_settings*]
-#   Statsd settings dictionary. 
+#   Statsd settings dictionary.
 # [*ldap_settings*]
 #   ldap settings dictionary.
 # [*mesos_settings*]
 #   mesos settings dictionary.
 
 # === Authors
-# Production Engineering SimilarWeb 
+# Production Engineering SimilarWeb
 # Copyright 2016 SimilarWeb.
 #
 class airflow (
@@ -179,7 +179,7 @@ class airflow (
   $smtp_port               = $airflow::params::smtp_port,
   $smtp_password           = $airflow::params::smtp_password,
   $smtp_mail_from          = $airflow::params::smtp_mail_from,
-  
+
   ## Celery settings
   $celery_app_name         = $airflow::params::celery_app_name,
   $celeryd_concurrency     = $airflow::params::celeryd_concurrency,
@@ -188,7 +188,7 @@ class airflow (
   $celery_result_backend   = $airflow::params::celery_result_backend,
   $flower_port             = $airflow::params::flower_port,
   $default_queue           = $airflow::params::default_queue,
-  
+
   ## Scheduler settings
   $job_heartbeat_sec       = $airflow::params::job_heartbeat_sec,
   $scheduler_heartbeat_sec = $airflow::params::scheduler_heartbeat_sec,
@@ -198,9 +198,9 @@ class airflow (
   $ldap_settings           = $airflow::params::ldap_settings,
   $mesos_settings          = $airflow::params::mesos_settings,
   ### END hiera lookups ###
-  
+
 ) inherits airflow::params {
-  
+
   validate_string($user)
   validate_string($group)
   validate_string($service_ensure)
@@ -240,7 +240,7 @@ class airflow (
   if ! ($::operatingsystem in ['RedHat', 'CentOS']
     and $::operatingsystemmajrelease == '7')
   {
-      fail("Module is not compatible with
+      warning("Airflow module has not been tested with
        ${::operatingsystem} Release: ${::operatingsystemmajrelease}")
   }
 
