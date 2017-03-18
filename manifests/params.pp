@@ -17,7 +17,7 @@ class airflow::params {
   $shell                     = '/bin/bash'
   $gid                       = undef
   $uid                       = undef
-  $folders_mode              = '0775'
+  $folders_mode              = 0775
 
   # General settings
   $log_folder                = '/var/log/airflow'
