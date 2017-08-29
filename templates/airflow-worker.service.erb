@@ -4,15 +4,15 @@ Wants=basic.target
 After=basic.target network.target
 
 [Service]
-PIDFile = <%= @run_folder %>/airflow_worker.pid
+PIDFile = <%= scope.lookupvar('airflow::run_folder') %>/airflow_worker.pid
 ExecStart=/usr/bin/airflow worker
 ExecReload=/bin/kill -HUP $MAINPID
-Environment="AIRFLOW_HOME=<%= @home_folder %>"
+Environment="AIRFLOW_HOME=<%= scope.lookupvar('airflow::home_folder')%>"
 KillMode=process
 Restart=on-failure
 RestartSec=15s
-User=<%= @user %>
-Group=<%= @group %>
+User=<%= scope.lookupvar('airflow::user')%>
+Group=<%= scope.lookupvar('airflow::group')%>
 
 [Install]
 WantedBy=multi-user.target
