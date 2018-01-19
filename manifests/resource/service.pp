@@ -14,7 +14,7 @@ define airflow::resource::service($service_name = $name) {
     require   => [Exec['systemctl-daemon-reload']],
     subscribe =>
     [
-      File["${service_name}.service"],
+      Systemd::Unit_file["${service_name}.service"],
       File["${airflow::home_folder}/airflow.cfg"]
     ]
   }
