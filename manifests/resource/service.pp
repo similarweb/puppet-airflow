@@ -2,17 +2,16 @@
 # == Description: Creates a systemd service definition 
 #
 define airflow::resource::service($service_name = $name) {
-  file { "${airflow::systemd_service_folder}/${service_name}.service":
-    mode    => '0644',
-    owner   => 'root',
-    group   => 'root',
+  systemd::unit_file { "${service_name}.service":
+    ensure  => 'file',
     content => template("${module_name}/${service_name}.service.erb"),
+    notify  => Service[$service_name],
     require => [Python::Pip[$airflow::package_name], File[$airflow::log_folder]]
   }
-  ~> Exec['systemctl-daemon-reload']
   service { $service_name:
     ensure    => $airflow::service_ensure,
     enable    => $airflow::service_enable,
+    require   => [Exec['systemctl-daemon-reload']],
     subscribe =>
     [
       File["${airflow::systemd_service_folder}/${service_name}.service"],
