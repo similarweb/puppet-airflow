@@ -251,7 +251,7 @@ class airflow (
        ${::operatingsystem} Release: ${::operatingsystemmajrelease}")
   }
 
-  include airflow::config,
-          airflow::install
+  contain airflow::config
+  contain airflow::install
 
 }

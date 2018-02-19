@@ -4,20 +4,15 @@ Wants=basic.target
 After=basic.target network.target
 
 [Service]
-PIDFile = <%= @run_folder %>/airflow_webserver.pid
-ExecStart=/usr/bin/gunicorn -w <%= @gunicorn_workers %> -t 120 -b <%= @web_server_host %>:<%= @web_server_port %> airflow.www.app:cached_app()
+PIDFile = <%= scope['airflow::run_folder'] %>/airflow_webserver.pid
+ExecStart=/usr/bin/gunicorn -w <%= scope['airflow::gunicorn_workers'] %> -t 120 -b <%= scope['airflow::web_server_host'] %>:<%= scope['airflow::web_server_port'] %> airflow.www.app:cached_app()
 ExecReload=/bin/kill -HUP $MAINPID
-Environment="AIRFLOW_HOME=<%= @home_folder %>"
+Environment="AIRFLOW_HOME=<%= scope['airflow::home_folder'] %>"
 KillMode=process
 Restart=on-failure
 RestartSec=15s
-User=<%= @user %>
-Group=<%= @group %>
+User=<%= scope['airflow::user'] %>
+Group=<%= scope['airflow::group'] %>
 
 [Install]
 WantedBy=multi-user.target
-
-
-
-
-

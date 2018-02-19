@@ -4,9 +4,9 @@ Wants=basic.target
 After=basic.target network.target
 
 [Service]
-Environment="AIRFLOW_HOME=<%= @home_folder %>"
-User=<%= @user %>
-Group=<%= @group %>
+Environment="AIRFLOW_HOME=<%= scope['airflow::home_folder'] %>"
+User=<%= scope['airflow::user'] %>
+Group=<%= scope['airflow::group'] %>
 Type=simple
 ExecStart=/bin/airflow flower
 KillMode=process

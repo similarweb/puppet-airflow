@@ -8,8 +8,8 @@ class airflow::config inherits airflow {
     ensure => 'present',
     name   => $airflow::group,
     gid    => $airflow::gid,
-  } ->
-  user { $airflow::user:
+  }
+  -> user { $airflow::user:
     ensure     => 'present',
     shell      => $airflow::shell,
     managehome => true,
