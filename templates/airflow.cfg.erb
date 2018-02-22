@@ -81,17 +81,12 @@ authenticate = <%= @authenticate %>
 # Set authentication backend
 auth_backend = <%= @auth_backend %>
 
-
 <% if !@ldap_settings.empty? -%>
-[ldap]
-uri = <%= @ldap_settings['uri'] %>
-user_filter = <%= @ldap_settings['user_filter'] %>
-user_name_attr = <%= @ldap_settings['user_name_attr'] %>
-bind_user = <%= @ldap_settings['bind_user'] %>
-bind_password = <%= @ldap_settings['bind_password'] %>
-basedn = <%= @ldap_settings['basedn'] %>
+[ldap]<% @ldap_settings.each do |key, value| %>
+<%= key %> = <%= value -%>
 <% end %>
-<% end %>
+<% end -%>
+<% end -%>
 
 # Filter the list of dags by owner name (requires authentication to be enabled)
 filter_by_owner = <%= @filter_by_owner %>
