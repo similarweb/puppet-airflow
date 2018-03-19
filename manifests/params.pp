@@ -70,6 +70,7 @@ class airflow::params {
   $default_queue             = 'default'
 
   ## Scheduler settings
+  $catchup                   = false
   $job_heartbeat_sec         = 5
   $scheduler_heartbeat_sec   = 5
 
