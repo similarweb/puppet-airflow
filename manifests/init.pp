@@ -101,6 +101,13 @@
 # [*default_queue*]
 #   Default queue that tasks get assigned to and that worker listen on.
 ###### Scheduler settings ######
+###### Scheduler settings ######
+#  [*catchup*]
+# Turn off scheduler catchup by setting this to False.
+# Default behavior is unchanged and
+# Command Line Backfills still work, but the scheduler
+# will not do scheduler catchup if this is False,
+# however it can be set on a per DAG basis in the
 # [*job_heartbeat_sec*]
 #   Task instances listen for external kill signal (when you clear tasks
 #   from the CLI or the UI), this defines the frequency at which they should
@@ -190,6 +197,7 @@ class airflow (
   $default_queue           = $airflow::params::default_queue,
 
   ## Scheduler settings
+  $catchup                 = $airflow::params::catchup,
   $job_heartbeat_sec       = $airflow::params::job_heartbeat_sec,
   $scheduler_heartbeat_sec = $airflow::params::scheduler_heartbeat_sec,
 
@@ -242,6 +250,7 @@ class airflow (
   validate_bool($expose_config)
   validate_bool($load_examples)
   validate_bool($donot_pickle)
+  validate_bool($catchup)
 
   # Module compatibility check
   if ! ($::operatingsystem in ['RedHat', 'CentOS']
