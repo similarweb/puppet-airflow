@@ -2,7 +2,7 @@ fixtures:
   forge_modules:
     stdlib:
       repo: 'puppetlabs/stdlib'
-      ref:  '4.9.0'
+      ref:  '4.13.1'
     python:
       repo: 'stankevich/python'
       ref:  '1.14.2'

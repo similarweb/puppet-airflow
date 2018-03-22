@@ -21,7 +21,7 @@ This module manages [airflow][1] by [Airbnb][2].
 
 The airflow module sets up and configures airflow.
 
-This module has been tested against airflow versions: 1.5.2, 1.6.2
+This module has been tested against airflow versions: 1.9.0
 
 ## Setup
 
@@ -67,12 +67,13 @@ Install this module via any of these approaches:
 
 ### Main class
 
-#### Install airflow 1.6.2 to /usr/local/airflow
+#### Install airflow 1.9.0 with mysql support
 
 ```puppet
 class { 'airflow':
-          version => '1.6.2',
-          home_folder => '/usr/local/airflow'
+          package_name => 'apache-airflow[mysql]',
+          version      => '1.9.0',
+          home_folder  => '/usr/local/airflow'
       }
 ```
 

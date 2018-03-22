@@ -1,8 +1,8 @@
 ---
 airflow::service_ensure: 'running'
 airflow::service_enable: true
-airflow::version: '1.6.2'
-airflow::package_name: 'airflow'
+airflow::version: '1.9.0'
+airflow::package_name: 'apache-airflow'
 airflow::user: 'airflow'
 airflow::group: 'airflow'
 airflow::folders_mode: '0775'
