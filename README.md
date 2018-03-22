@@ -97,9 +97,13 @@ class { 'airflow':
 #### Install airflow, the work scheduler and the celery based worker
 
 ```puppet
-class { 'airflow': } ->
-class { 'airflow::service::scheduler:' }
-class { 'airflow::service::worker:' }
+class { 'airflow': }
+class { 'airflow::service::scheduler':
+  require => Class['airflow']
+}
+class { 'airflow::service::worker':
+  require => Class['airflow']
+}
 ```
 
 ## Hiera Support
@@ -153,11 +157,11 @@ airflow::mesos_settings:
 4. Submit a Pull Request using Github
 
 
-[1]: https://github.com/airbnb/airflow
-[2]: https://www.airbnb.com
-[3]: http://pythonhosted.org/airflow/installation.html
+[1]: https://github.com/apache/incubator-airflow/
+[2]: http://airbnb.io/
+[3]: https://airflow.incubator.apache.org/installation.html
 [4]: https://github.com/rodjek/librarian-puppet
-[5]: https://github.com/airbnb/airflow/blob/master/docs/start.rst
+[5]: https://airflow.incubator.apache.org/start.html
 [6]: https://github.com/puppetlabs/puppetlabs-mysql
 [7]: https://github.com/puppetlabs/puppetlabs-rabbitmq
 [8]: https://github.com/garethr/garethr-erlang
