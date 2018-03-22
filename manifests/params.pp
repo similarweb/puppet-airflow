@@ -13,10 +13,6 @@ class airflow::params {
   # User and group settings
   $user                      = 'airflow'
   $group                     = 'airflow'
-  $user_home_folder          = "/home/${user}"
-  $shell                     = '/bin/bash'
-  $gid                       = undef
-  $uid                       = undef
   $folders_mode              = '0775'
 
   # General settings

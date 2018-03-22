@@ -5,8 +5,6 @@ airflow::version: '1.6.2'
 airflow::package_name: 'airflow'
 airflow::user: 'airflow'
 airflow::group: 'airflow'
-airflow::user_home_folder: "/home/%{lookup('airflow::user')}"
-airflow::shell: '/bin/bash'
 airflow::folders_mode: '0775'
 airflow::log_folder: '/var/log/airflow'
 airflow::run_folder: '/var/run/airflow'

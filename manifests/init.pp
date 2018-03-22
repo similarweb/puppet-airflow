@@ -141,11 +141,7 @@ class airflow (
   # User and group settings
   $user,
   $group,
-  $user_home_folder,
-  $shell,
   $folders_mode,
-  $gid = undef,
-  $uid = undef,
 
   # General settings
   $log_folder,
@@ -212,18 +208,14 @@ class airflow (
   validate_string($service_ensure)
   validate_string($package_name)
   validate_string($worker_class)
+  validate_string($folders_mode)
 
-  validate_absolute_path($user_home_folder)
-  validate_absolute_path($shell)
   validate_absolute_path($log_folder)
   validate_absolute_path($run_folder)
   validate_absolute_path($home_folder)
   validate_absolute_path($dags_folder)
   validate_absolute_path($plugins_folder)
 
-  validate_integer($folders_mode)
-  validate_integer($gid)
-  validate_integer($uid)
   validate_integer($parallelism)
   validate_integer($dag_concurrency)
   validate_integer($max_active_runs_per_dag)
