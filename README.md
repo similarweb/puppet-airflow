@@ -32,7 +32,7 @@ airflow initdb
 ```
 More info [here][5].
 
-The module has been tested on CentOS 7
+The module has been tested on Ubuntu 15.10+
 
 
 ### The module manages the following

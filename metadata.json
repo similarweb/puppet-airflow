@@ -14,9 +14,9 @@
   ],
   "operatingsystem_support": [
     {
-      "operatingsystem": "RedHat",
+      "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "7.0"
+        "15.10"
       ]
     }
   ],

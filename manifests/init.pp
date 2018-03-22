@@ -235,14 +235,6 @@ class airflow (
   validate_bool($donot_pickle)
   validate_bool($catchup)
 
-  # Module compatibility check
-  if ! ($::operatingsystem in ['RedHat', 'CentOS']
-    and $::operatingsystemmajrelease == '7')
-  {
-      fail("Module is not compatible with
-       ${::operatingsystem} Release: ${::operatingsystemmajrelease}")
-  }
-
   include ::systemd
   contain airflow::config
   contain airflow::install
