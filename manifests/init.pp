@@ -131,84 +131,82 @@
 class airflow (
   # {Params}
   # Airflow service settings
-  $service_ensure          = $airflow::params::service_ensure,
-  $service_enable          = $airflow::params::service_enable,
+  $service_ensure,
+  $service_enable,
 
   # Airflow install settings
-  $version                 = $airflow::params::version,
-  $package_name            = $airflow::params::package_name,
+  $version,
+  $package_name,
 
   # User and group settings
-  $user                    = $airflow::params::user,
-  $group                   = $airflow::params::group,
-  $user_home_folder        = $airflow::params::user_home_folder,
-  $shell                   = $airflow::params::shell,
-  $folders_mode            = $airflow::params::folders_mode,
-  $gid                     = $airflow::params::gid,
-  $uid                     = $airflow::params::uid,
+  $user,
+  $group,
+  $user_home_folder,
+  $shell,
+  $folders_mode,
+  $gid = undef,
+  $uid = undef,
 
   # General settings
-  $log_folder              = $airflow::params::log_folder,
-  $run_folder              = $airflow::params::run_folder,
-  $systemd_service_folder  = $airflow::params::systemd_service_folder,
+  $log_folder,
+  $run_folder,
+  $systemd_service_folder,
 
   # Airflow.cfg file
   ## Core settings
-  $home_folder             = $airflow::params::home_folder,
-  $dags_folder             = $airflow::params::dags_folder,
-  $s3_log_folder           = $airflow::params::s3_log_folder,
-  $executor                = $airflow::params::executor,
-  $sql_alchemy_conn        = $airflow::params::sql_alchemy_conn,
-  $parallelism             = $airflow::params::parallelism,
-  $dag_concurrency         = $airflow::params::dag_concurrency,
-  $max_active_runs_per_dag = $airflow::params::max_active_runs_per_dag,
-  $load_examples           = $airflow::params::load_examples,
-  $fernet_key              = $airflow::params::fernet_key,
-  $donot_pickle            = $airflow::params::donot_pickle,
-  $plugins_folder          = $airflow::params::plugins_folder,
+  $home_folder,
+  $dags_folder,
+  $s3_log_folder,
+  $executor,
+  $sql_alchemy_conn,
+  $parallelism,
+  $dag_concurrency,
+  $max_active_runs_per_dag,
+  $load_examples,
+  $fernet_key,
+  $donot_pickle,
+  $plugins_folder,
 
   ## Webserver settings
-  $base_url                = $airflow::params::base_url,
-  $web_server_host         = $airflow::params::web_server_host,
-  $web_server_port         = $airflow::params::web_server_port,
-  $secret_key              = $airflow::params::secret_key,
-  $gunicorn_workers        = $airflow::params::gunicorn_workers,
-  $worker_class            = $airflow::params::worker_class,
-  $expose_config           = $airflow::params::expose_config,
-  $authenticate            = $airflow::params::authenticate,
-  $auth_backend            = $airflow::params::auth_backend,
-  $filter_by_owner         = $airflow::params::filter_by_owner,
+  $base_url,
+  $web_server_host,
+  $web_server_port,
+  $secret_key,
+  $gunicorn_workers,
+  $worker_class,
+  $expose_config,
+  $authenticate,
+  $auth_backend = undef,
+  $filter_by_owner,
 
   ## Mail settings
-  $smtp_host               = $airflow::params::smtp_host,
-  $smtp_starttls           = $airflow::params::smtp_starttls,
-  $smtp_user               = $airflow::params::smtp_user,
-  $smtp_port               = $airflow::params::smtp_port,
-  $smtp_password           = $airflow::params::smtp_password,
-  $smtp_mail_from          = $airflow::params::smtp_mail_from,
+  $smtp_host,
+  $smtp_starttls,
+  $smtp_user,
+  $smtp_port,
+  $smtp_password,
+  $smtp_mail_from,
 
   ## Celery settings
-  $celery_app_name         = $airflow::params::celery_app_name,
-  $celeryd_concurrency     = $airflow::params::celeryd_concurrency,
-  $worker_log_server_port  = $airflow::params::worker_log_server_port,
-  $broker_url              = $airflow::params::broker_url,
-  $celery_result_backend   = $airflow::params::celery_result_backend,
-  $flower_port             = $airflow::params::flower_port,
-  $default_queue           = $airflow::params::default_queue,
+  $celery_app_name,
+  $celeryd_concurrency,
+  $worker_log_server_port,
+  $broker_url,
+  $celery_result_backend,
+  $flower_port,
+  $default_queue,
 
   ## Scheduler settings
-  $catchup                 = $airflow::params::catchup,
-  $job_heartbeat_sec       = $airflow::params::job_heartbeat_sec,
-  $scheduler_heartbeat_sec = $airflow::params::scheduler_heartbeat_sec,
+  $catchup,
+  $job_heartbeat_sec,
+  $scheduler_heartbeat_sec,
 
   ### START hiera lookups ###
-  $statsd_settings         = $airflow::params::statsd_settings,
-  $ldap_settings           = $airflow::params::ldap_settings,
-  $mesos_settings          = $airflow::params::mesos_settings,
+  $statsd_settings,
+  $ldap_settings,
+  $mesos_settings,
   ### END hiera lookups ###
-
-) inherits airflow::params {
-
+) {
   validate_string($user)
   validate_string($group)
   validate_string($service_ensure)
@@ -224,15 +222,8 @@ class airflow (
   validate_absolute_path($plugins_folder)
 
   validate_integer($folders_mode)
-
-  if $gid != undef {
-    validate_integer($gid)
-  }
-
-  if $uid != undef {
-    validate_integer($uid)
-  }
-
+  validate_integer($gid)
+  validate_integer($uid)
   validate_integer($parallelism)
   validate_integer($dag_concurrency)
   validate_integer($max_active_runs_per_dag)
@@ -256,11 +247,11 @@ class airflow (
   if ! ($::operatingsystem in ['RedHat', 'CentOS']
     and $::operatingsystemmajrelease == '7')
   {
-      warning("Airflow module has not been tested with
+      fail("Module is not compatible with
        ${::operatingsystem} Release: ${::operatingsystemmajrelease}")
   }
 
+  include ::systemd
   contain airflow::config
   contain airflow::install
-
 }
