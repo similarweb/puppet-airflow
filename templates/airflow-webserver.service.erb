@@ -5,7 +5,7 @@ After=basic.target network.target
 
 [Service]
 PIDFile = <%= scope['airflow::run_folder'] %>/airflow_webserver.pid
-ExecStart=/usr/bin/gunicorn -w <%= scope['airflow::gunicorn_workers'] %> -t 120 -b <%= scope['airflow::web_server_host'] %>:<%= scope['airflow::web_server_port'] %> airflow.www.app:cached_app()
+ExecStart=/usr/bin/airflow webserver
 ExecReload=/bin/kill -HUP $MAINPID
 Environment="AIRFLOW_HOME=<%= scope['airflow::home_folder'] %>"
 KillMode=process

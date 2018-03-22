@@ -59,6 +59,9 @@ web_server_host = <%= @web_server_host %>
 # The port on which to run the web server
 web_server_port = <%= @web_server_port %>
 
+# Number of seconds the gunicorn webserver waits before timing out on a worker
+web_server_worker_timeout = 120
+
 # Secret key used to run your flask app
 secret_key =  <%= @secret_key %>
 
