@@ -18,7 +18,6 @@ class airflow::params {
   # General settings
   $log_folder                = '/var/log/airflow'
   $run_folder                = '/var/run/airflow'
-  $systemd_service_folder    = '/lib/systemd/system'
 
   # Airflow.cfg file
   ## Core settings

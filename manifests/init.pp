@@ -149,7 +149,6 @@ class airflow (
   # General settings
   $log_folder,
   $run_folder,
-  $systemd_service_folder,
 
   # Airflow.cfg file
   ## Core settings
