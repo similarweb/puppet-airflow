@@ -121,6 +121,8 @@
 #   Statsd settings dictionary.
 # [*ldap_settings*]
 #   ldap settings dictionary.
+# [*google_settings*]
+#   Google Oauth2 settings dictionary.
 # [*mesos_settings*]
 #   mesos settings dictionary.
 
@@ -202,6 +204,7 @@ class airflow (
   ### START hiera lookups ###
   $statsd_settings,
   $ldap_settings,
+  $google_settings,
   $mesos_settings,
   ### END hiera lookups ###
 ) {
