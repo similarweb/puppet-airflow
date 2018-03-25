@@ -52,7 +52,7 @@ Please refer to airflow [installation][3] before using this module.
 airflow module depends on the following puppet modules:
 
 * puppetlabs-stdlib >= 4.9.0
-* stankevich-python >= 1.9.8
+* stankevich-python >= 1.14.2
 * camptocamp-systemd >= 1.0.0
 
 ### Beginning with airflow
