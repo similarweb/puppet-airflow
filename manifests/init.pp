@@ -52,6 +52,10 @@
 #   The ip specified when starting the web server.
 # [*web_server_port*]
 #   The port on which to run the web server.
+# [*web_server_ssl_cert*]
+#   Path to webserver ssl certficate.
+# [*web_server_ssl_key*]
+#   Path to web server ssl key.
 # [*secret_key*]
 #   Secret key used to run your flask app.
 # [*gunicorn_workers*]
@@ -171,6 +175,8 @@ class airflow (
   $base_url                = $airflow::params::base_url,
   $web_server_host         = $airflow::params::web_server_host,
   $web_server_port         = $airflow::params::web_server_port,
+  $web_server_ssl_cert     = $airflow::params::web_server_ssl_cert,
+  $web_server_ssl_key      = $airflow::params::web_server_ssl_key,
   $secret_key              = $airflow::params::secret_key,
   $gunicorn_workers        = $airflow::params::gunicorn_workers,
   $worker_class            = $airflow::params::worker_class,
