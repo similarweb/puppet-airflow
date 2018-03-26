@@ -176,7 +176,7 @@ class airflow (
   $worker_class,
   $expose_config,
   $authenticate,
-  $auth_backend = undef,
+  $auth_backend,
   $filter_by_owner,
 
   ## Mail settings

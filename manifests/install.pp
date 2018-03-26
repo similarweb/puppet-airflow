@@ -17,7 +17,7 @@ class airflow::install inherits airflow {
     }
   )
 
-  if ! $requirements {
+  if ! $airflow::requirements {
     # Use pip
     ensure_resource(
       python::pip,
