@@ -1,7 +1,10 @@
 require 'spec_helper'
-describe 'airflow' do
+describe 'airflow', :type => :class do
 
   context 'with defaults for all parameters' do
-    it { should contain_class('airflow') }
+    on_supported_os.each do |os, facts|
+      let(:facts) { facts }
+      it { should contain_class('airflow') }
+    end
   end
 end

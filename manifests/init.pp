@@ -235,7 +235,6 @@ class airflow (
   validate_bool($donot_pickle)
   validate_bool($catchup)
 
-  include ::systemd
   contain airflow::config
   contain airflow::install
 }

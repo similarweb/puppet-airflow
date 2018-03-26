@@ -1,0 +1,13 @@
+fixtures:
+  forge_modules:
+    stdlib:
+      repo: 'puppetlabs/stdlib'
+      ref:  '4.9.0'
+    python:
+      repo: 'stankevich/python'
+      ref:  '1.14.2'
+    systemd:
+      repo: 'camptocamp/systemd'
+      ref: '1.0.0'
+  symlinks:
+    airflow: "#{source_dir}"
