@@ -14,7 +14,7 @@ class airflow::config inherits airflow {
     owner   => $airflow::user,
     group   => $airflow::group,
     mode    => $airflow::folders_mode,
-    require => Python::Pip[$airflow::package_name],
+    require => Class[airflow::install],
     recurse => true
   }
   file { $airflow_app_folders:
@@ -29,6 +29,6 @@ class airflow::config inherits airflow {
     ensure  => 'file',
     content => template("${module_name}/airflow.cfg.erb"),
     mode    => '0755',
-    require =>  [Python::Pip[$airflow::package_name], File[$airflow::home_folder]]
+    require =>  [Class[airflow::install], File[$airflow::home_folder]]
   }
 }

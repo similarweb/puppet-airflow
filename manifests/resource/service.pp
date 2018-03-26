@@ -6,7 +6,7 @@ define airflow::resource::service($service_name = $name) {
     ensure  => 'file',
     content => template("${module_name}/${service_name}.service.erb"),
     notify  => Service[$service_name],
-    require => [Python::Pip[$airflow::package_name], File[$airflow::log_folder]]
+    require => [Class[airflow::install], File[$airflow::log_folder]]
   }
   service { $service_name:
     ensure    => $airflow::service_ensure,

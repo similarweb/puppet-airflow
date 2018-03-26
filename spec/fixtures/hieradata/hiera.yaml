@@ -1,0 +1,8 @@
+---
+:backends:
+  - yaml
+:hierarchy:
+  - "%{custom_hiera}"
+  - test
+:yaml:
+  :datadir: 'spec/fixtures/hieradata'

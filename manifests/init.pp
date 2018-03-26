@@ -137,6 +137,9 @@ class airflow (
   # Airflow install settings
   $version,
   $package_name,
+  $virtualenv,
+  $requirements,
+  $python,
 
   # User and group settings
   $user,
@@ -207,6 +210,7 @@ class airflow (
   validate_string($group)
   validate_string($service_ensure)
   validate_string($package_name)
+  validate_string($virtualenv)
   validate_string($worker_class)
   validate_string($folders_mode)
 

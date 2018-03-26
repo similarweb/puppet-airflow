@@ -8,5 +8,14 @@ describe 'airflow::service::worker', :type => :class do
       it { is_expected.to contain_class('airflow::service::worker') }
     end
   end
+
+  context 'with virtualenv requirements' do
+    on_supported_os.each do |os, facts|
+      let(:facts) { facts }
+      let(:hieradata) { 'reqs' }
+      it { should compile }
+      it { is_expected.to contain_class('airflow::service::worker') }
+    end
+  end
 end
 

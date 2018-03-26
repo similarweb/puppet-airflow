@@ -77,6 +77,23 @@ class { 'airflow':
       }
 ```
 
+#### Install airflow using a pip requirements file
+
+Having a requirements file simplifies things, as all related python packages can be installed at once.
+
+For example, to use Google's oauth you have to install `flask_oauthlib` into the same virtualenv as the rest of airflow.
+
+The following code depends on puppet previously putting down the file at `/usr/local/share/airflow_reqs.txt`,
+whether through a `file` command or some other way.
+
+```puppet
+class { 'airflow':
+          python       => '3.4',
+          requirements => '/usr/local/share/airflow_reqs.txt',
+          home_folder  => '/usr/local/airflow'
+      }
+```
+
 #### Install airflow, the work scheduler and the celery based worker
 
 ```puppet
