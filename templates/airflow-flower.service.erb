@@ -4,14 +4,15 @@ Wants=basic.target
 After=basic.target network.target
 
 [Service]
-Environment="AIRFLOW_HOME=<%= scope['airflow::home_folder'] %>"
-User=<%= scope['airflow::user'] %>
-Group=<%= scope['airflow::group'] %>
 Type=simple
-ExecStart=/bin/airflow flower
+ExecStart=<%= @cmd_path %>/bin/airflow flower
+Environment="AIRFLOW_HOME=<%= scope['airflow::home_folder'] %>"
+Environment="PATH=<%= @cmd_path %>/bin:$PATH"
 KillMode=process
 Restart=on-failure
 RestartSec=15s
+User=<%= scope['airflow::user'] %>
+Group=<%= scope['airflow::group'] %>
 
 [Install]
 WantedBy=multi-user.target

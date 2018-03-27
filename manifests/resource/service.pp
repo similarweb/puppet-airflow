@@ -2,6 +2,7 @@
 # == Description: Creates a systemd service definition 
 #
 define airflow::resource::service($service_name = $name) {
+  $cmd_path = "/home/${airflow::user}/venv/${airflow::virtualenv}"
   systemd::unit_file { "${service_name}.service":
     ensure  => 'file',
     content => template("${module_name}/${service_name}.service.erb"),

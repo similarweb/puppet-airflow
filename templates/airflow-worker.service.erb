@@ -5,9 +5,10 @@ After=basic.target network.target
 
 [Service]
 PIDFile = <%= scope['airflow::run_folder'] %>/airflow_worker.pid
-ExecStart=/usr/bin/airflow worker
+ExecStart=<%= @cmd_path %>/bin/airflow worker
 ExecReload=/bin/kill -HUP $MAINPID
 Environment="AIRFLOW_HOME=<%= scope['airflow::home_folder'] %>"
+Environment="PATH=<%= @cmd_path %>/bin:$PATH"
 KillMode=process
 Restart=on-failure
 RestartSec=15s

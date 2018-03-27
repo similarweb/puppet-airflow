@@ -16,6 +16,10 @@ describe 'airflow::service::scheduler', :type => :class do
       it { should compile }
       it { is_expected.to contain_class('airflow::service::scheduler') }
       it { is_expected.to contain_systemd__unit_file('airflow-scheduler.service') }
+      it do
+        is_expected.to contain_file('/etc/systemd/system/airflow-scheduler.service') \
+          .with_content(%r'^ExecStart=/home/airflow/venv/airflow/bin/airflow scheduler$')
+      end
     end
   end
 end
