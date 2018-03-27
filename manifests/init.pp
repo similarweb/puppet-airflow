@@ -63,7 +63,7 @@
 #   Expose the configuration file in the web server.
 # [*authenticate*]
 #   Set to true to turn on authentication.
-#   http://pythonhosted.org/airflow/installation.html#web-authentication
+#   https://airflow.apache.org/security.html#web-authentication
 # [*auth_backend*]
 #   Airflow Authentication Backend, for example LDAP.
 # [*filter_by_owner*]
