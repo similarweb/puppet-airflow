@@ -3,5 +3,6 @@
 .DS_Store
 .lock
 .bundle/config
+/spec/fixtures/modules/
 Gemfile.lock
 /vendor/bundle
