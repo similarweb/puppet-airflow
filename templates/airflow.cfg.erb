@@ -59,9 +59,13 @@ web_server_host = <%= @web_server_host %>
 # The port on which to run the web server
 web_server_port = <%= @web_server_port %>
 
+# Paths to the SSL certificate and key for the web server. When both are
+# provided SSL will be enabled. This does not change the web server port.
+web_server_ssl_cert = <%= @web_server_ssl_cert %>
+web_server_ssl_key =  <%= @web_server_ssl_key %>
+
 # Secret key used to run your flask app
 secret_key =  <%= @secret_key %>
-
 
 # Number of workers to run the Gunicorn web server
 workers = <%= @gunicorn_workers %>

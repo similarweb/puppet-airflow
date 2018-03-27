@@ -1,18 +1,29 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 [Unit]
-Description= Airflow webserver
-Wants=basic.target
-After=basic.target network.target
+Description=Airflow webserver daemon
+After=network.target
 
 [Service]
-PIDFile = <%= scope['airflow::run_folder'] %>/airflow_webserver.pid
-ExecStart=/usr/bin/gunicorn -w <%= scope['airflow::gunicorn_workers'] %> -t 120 -b <%= scope['airflow::web_server_host'] %>:<%= scope['airflow::web_server_port'] %> airflow.www.app:cached_app()
-ExecReload=/bin/kill -HUP $MAINPID
-Environment="AIRFLOW_HOME=<%= scope['airflow::home_folder'] %>"
-KillMode=process
-Restart=on-failure
-RestartSec=15s
+Environment="AIRFLOW_HOME=/opt/airflow"
+# EnvironmentFile=/etc/sysconfig/airflow
 User=<%= scope['airflow::user'] %>
 Group=<%= scope['airflow::group'] %>
+Type=simple
+ExecStart=/bin/airflow webserver --pid <%= scope['airflow::run_folder'] %>/airflow_webserver.pid
+Restart=on-failure
+RestartSec=5s
+PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target

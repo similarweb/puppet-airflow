@@ -44,6 +44,8 @@ class airflow::params {
   $base_url                  = 'http://localhost'
   $web_server_host           = '0.0.0.0'
   $web_server_port           = 8080
+  $web_server_ssl_cert       = undef
+  $web_server_ssl_key        = undef
   $secret_key                = 'temporary_key'
   $gunicorn_workers          = 4
   $worker_class              = 'sync'
