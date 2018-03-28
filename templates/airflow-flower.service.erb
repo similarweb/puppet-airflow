@@ -5,9 +5,8 @@ After=basic.target network.target
 
 [Service]
 Type=simple
-ExecStart=<%= @cmd_path %>/bin/airflow flower
+ExecStart=/bin/sh -c '. <%= @cmd_path %>/bin/activate; exec airflow flower'
 Environment="AIRFLOW_HOME=<%= scope['airflow::home_folder'] %>"
-Environment="PATH=<%= @cmd_path %>/bin:$PATH"
 KillMode=process
 Restart=on-failure
 RestartSec=15s
