@@ -8,8 +8,8 @@ define airflow::resource::service($service_name = $name) {
     group   => 'root',
     content => template("${module_name}/${service_name}.service.erb"),
     require => [Python::Pip[$airflow::package_name], File[$airflow::log_folder]]
-  } ~>
-  Exec['systemctl-daemon-reload']
+  }
+  ~> Exec['systemctl-daemon-reload']
   service { $service_name:
     ensure    => $airflow::service_ensure,
     enable    => $airflow::service_enable,

@@ -59,9 +59,13 @@ web_server_host = <%= @web_server_host %>
 # The port on which to run the web server
 web_server_port = <%= @web_server_port %>
 
+# Paths to the SSL certificate and key for the web server. When both are
+# provided SSL will be enabled. This does not change the web server port.
+web_server_ssl_cert = <%= @web_server_ssl_cert %>
+web_server_ssl_key =  <%= @web_server_ssl_key %>
+
 # Secret key used to run your flask app
 secret_key =  <%= @secret_key %>
-
 
 # Number of workers to run the Gunicorn web server
 workers = <%= @gunicorn_workers %>
@@ -81,17 +85,12 @@ authenticate = <%= @authenticate %>
 # Set authentication backend
 auth_backend = <%= @auth_backend %>
 
-
 <% if !@ldap_settings.empty? -%>
-[ldap]
-uri = <%= @ldap_settings['uri'] %>
-user_filter = <%= @ldap_settings['user_filter'] %>
-user_name_attr = <%= @ldap_settings['user_name_attr'] %>
-bind_user = <%= @ldap_settings['bind_user'] %>
-bind_password = <%= @ldap_settings['bind_password'] %>
-basedn = <%= @ldap_settings['basedn'] %>
+[ldap]<% @ldap_settings.each do |key, value| %>
+<%= key %> = <%= value -%>
 <% end %>
-<% end %>
+<% end -%>
+<% end -%>
 
 # Filter the list of dags by owner name (requires authentication to be enabled)
 filter_by_owner = <%= @filter_by_owner %>
@@ -111,6 +110,18 @@ smtp_mail_from = <%= @smtp_mail_from %>
 [celery]
 # This section only applies if you are using the CeleryExecutor in
 # [core] section above
+
+# Enable / Disable CeleryExecutor with SSL.
+# Ensure you properly generate client and server certs and keys.
+#
+# TODO:
+# * configure 'celery_ssl_active' by params
+# * setup an SSL key and certs
+#
+# celery_ssl_cacert = <%= @celery_ssl_cacert %>
+# celery_ssl_cert = <%= @celery_ssl_cert %>
+# celery_ssl_key = <%= @celery_ssl_key %>
+celery_ssl_active = false
 
 # The app name that will be used by celery
 celery_app_name = <%= @celery_app_name %>
@@ -154,6 +165,13 @@ job_heartbeat_sec = <%= @job_heartbeat_sec %>
 # how often the scheduler should run (in seconds).
 scheduler_heartbeat_sec = <%= @scheduler_heartbeat_sec %>
 
+# Turn off scheduler catchup by setting this to False.
+# Default behavior is unchanged and
+# Command Line Backfills still work, but the scheduler
+# will not do scheduler catchup if this is False,
+# however it can be set on a per DAG basis in the
+# DAG definition (catchup)
+catchup_by_default = <%= @catchup %>
 
 <% if @statsd_settings['statsd_on'] -%>
 # Statsd (https://github.com/etsy/statsd) integration settings
@@ -199,7 +217,7 @@ authenticate = <%= @mesos_settings['authenticate'] %>
 
 <% if @mesos_settings['authenticate'] -%>
 # Mesos credentials, if authentication is enabled
- default_principal = <%= @mesos_settings['default_principal'] %> 
+ default_principal = <%= @mesos_settings['default_principal'] %>
  default_secret =  <%= @mesos_settings['default_secret'] %>
 <% end %>
 <% end %>

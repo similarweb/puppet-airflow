@@ -52,6 +52,10 @@
 #   The ip specified when starting the web server.
 # [*web_server_port*]
 #   The port on which to run the web server.
+# [*web_server_ssl_cert*]
+#   Path to webserver ssl certficate.
+# [*web_server_ssl_key*]
+#   Path to web server ssl key.
 # [*secret_key*]
 #   Secret key used to run your flask app.
 # [*gunicorn_workers*]
@@ -101,6 +105,13 @@
 # [*default_queue*]
 #   Default queue that tasks get assigned to and that worker listen on.
 ###### Scheduler settings ######
+###### Scheduler settings ######
+#  [*catchup*]
+# Turn off scheduler catchup by setting this to False.
+# Default behavior is unchanged and
+# Command Line Backfills still work, but the scheduler
+# will not do scheduler catchup if this is False,
+# however it can be set on a per DAG basis in the
 # [*job_heartbeat_sec*]
 #   Task instances listen for external kill signal (when you clear tasks
 #   from the CLI or the UI), this defines the frequency at which they should
@@ -164,6 +175,8 @@ class airflow (
   $base_url                = $airflow::params::base_url,
   $web_server_host         = $airflow::params::web_server_host,
   $web_server_port         = $airflow::params::web_server_port,
+  $web_server_ssl_cert     = $airflow::params::web_server_ssl_cert,
+  $web_server_ssl_key      = $airflow::params::web_server_ssl_key,
   $secret_key              = $airflow::params::secret_key,
   $gunicorn_workers        = $airflow::params::gunicorn_workers,
   $worker_class            = $airflow::params::worker_class,
@@ -190,6 +203,7 @@ class airflow (
   $default_queue           = $airflow::params::default_queue,
 
   ## Scheduler settings
+  $catchup                 = $airflow::params::catchup,
   $job_heartbeat_sec       = $airflow::params::job_heartbeat_sec,
   $scheduler_heartbeat_sec = $airflow::params::scheduler_heartbeat_sec,
 
@@ -242,6 +256,7 @@ class airflow (
   validate_bool($expose_config)
   validate_bool($load_examples)
   validate_bool($donot_pickle)
+  validate_bool($catchup)
 
   # Module compatibility check
   if ! ($::operatingsystem in ['RedHat', 'CentOS']
@@ -251,7 +266,7 @@ class airflow (
        ${::operatingsystem} Release: ${::operatingsystemmajrelease}")
   }
 
-  include airflow::config,
-          airflow::install
+  contain airflow::config
+  contain airflow::install
 
 }
