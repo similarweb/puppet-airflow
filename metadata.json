@@ -30,7 +30,7 @@
   "description": "Airflow is a system to programmatically author, schedule and monitor data pipelines.",
   "dependencies": [
     {"name":"puppetlabs-stdlib","version_requirement":">= 4.13.1"},
-    {"name":"stankevich-python","version_requirement":">= 1.14.2"},
+    {"name":"puppet-python","version_requirement":">= 2.2.2"},
     {"name":"camptocamp-systemd","version_requirement":">= 1.0.0"}
   ]
 }

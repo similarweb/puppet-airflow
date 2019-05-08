@@ -2,10 +2,10 @@ fixtures:
   forge_modules:
     stdlib:
       repo: 'puppetlabs/stdlib'
-      ref:  '4.13.1'
+      ref:  '4.20.0'
     python:
-      repo: 'stankevich/python'
-      ref:  '1.14.2'
+      repo: 'puppet/python'
+      ref:  '2.2.2'
     systemd:
       repo: 'camptocamp/systemd'
       ref: '1.0.0'
