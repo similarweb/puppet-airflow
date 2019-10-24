@@ -85,7 +85,7 @@
 ###### Celery settings ######
 # [*celery_app_name*]
 #   The app name that will be used by celery.
-# [*celeryd_concurrency*]
+# [*worker_concurrency*]
 #   The concurrency that will be used when starting workers with the
 #   "airflow worker" command.
 # [*worker_log_server_port*]
@@ -94,7 +94,7 @@
 #   web server.
 # [*broker_url*]
 #   The celery broker URL.
-# [*celery_result_backend*]
+# [*result_backend*]
 #   The celery result backend setting.
 # [*flower_port*]
 #   Celery flower is a sweet UI for celery.
@@ -189,10 +189,10 @@ class airflow (
 
   ## Celery settings
   $celery_app_name,
-  $celeryd_concurrency,
+  $worker_concurrency,
   $worker_log_server_port,
   $broker_url,
-  $celery_result_backend,
+  $result_backend,
   $flower_port,
   $default_queue,
 
@@ -228,7 +228,7 @@ class airflow (
   validate_integer($job_heartbeat_sec)
   validate_integer($scheduler_heartbeat_sec)
   validate_integer($web_server_port)
-  validate_integer($celeryd_concurrency)
+  validate_integer($worker_concurrency)
   validate_integer($worker_log_server_port)
   validate_integer($flower_port)
   validate_integer($smtp_port)

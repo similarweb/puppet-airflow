@@ -1,20 +1,19 @@
 # THIS FILE IS AUTOMATICALLY DISTRIBUTED BY PUPPET.  ANY CHANGES WILL BE OVERWRITTEN.
 [core]
-# The home folder for airflow, default is ~/airflow
-airflow_home = <%= @home_folder %>
-
 # The folder where your airflow pipelines live, most likely a
 # subfolder in a code repository
+# This path must be absolute
 dags_folder = <%= @dags_folder %>
 
 # The folder where airflow should store its log files
+# This path must be absolute
 base_log_folder = <%= @log_folder %>
 # An S3 location can be provided for log backups
 # For S3, use the full URL to the base folder (starting with "s3://...")
 s3_log_folder = <%= @s3_log_folder %>
 
 # The executor class that airflow should use. Choices include
-# SequentialExecutor, LocalExecutor, CeleryExecutor
+# SequentialExecutor, LocalExecutor, CeleryExecutor, DaskExecutor, KubernetesExecutor
 executor = <%= @executor %>
 
 # The SqlAlchemy connection string to the metadata database.
@@ -49,7 +48,7 @@ donot_pickle = <%= @donot_pickle %>
 
 [webserver]
 # The base url of your website as airflow cannot guess what domain or
-# cname you are using. This is use in automated emails that
+# cname you are using. This is used in automated emails that
 # airflow sends to point links to the right web server
 base_url = <%= @base_url %>
 
@@ -71,7 +70,7 @@ workers = <%= @gunicorn_workers %>
 
 # The worker class gunicorn should use. Choices include
 # sync (default), eventlet, gevent
-worker_class =  <%= @worker_class %>
+worker_class = <%= @worker_class %>
 
 # Expose the configuration file in the web server
 expose_config = <%= @expose_config %>
@@ -136,7 +135,7 @@ celery_app_name = <%= @celery_app_name %>
 # "airflow worker" command. This defines the number of task instances that
 # a worker will take, so size up your workers based on the resources on
 # your worker box and the nature of your tasks
-celeryd_concurrency = <%= @celeryd_concurrency %>
+worker_concurrency = <%= @worker_concurrency %>
 
 # When you start an airflow worker, airflow starts a tiny web server
 # subprocess to serve the workers local log files to the airflow main
@@ -148,10 +147,16 @@ worker_log_server_port = <%= @worker_log_server_port %>
 # The Celery broker URL. Celery supports RabbitMQ, Redis and experimentally
 # a sqlalchemy database. Refer to the Celery documentation for more
 # information.
+# http://docs.celeryproject.org/en/latest/userguide/configuration.html#broker-settings
 broker_url = <%= @broker_url %>
 
-# Another key Celery setting
-celery_result_backend = <%= @celery_result_backend %>
+# The Celery result_backend. When a job finishes, it needs to update the
+# metadata of the job. Therefore it will post a message on a message bus,
+# or insert it into a database (depending of the backend)
+# This status is used by the scheduler to update the state of the task
+# The use of a database is highly recommended
+# http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-result-backend-settings
+result_backend = <%= @result_backend %>
 
 # Celery Flower is a sweet UI for Celery. Airflow has a shortcut to start
 # it `airflow flower`. This defines the port that Celery Flower runs on

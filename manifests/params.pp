@@ -7,7 +7,7 @@ class airflow::params {
   $service_enable            = true
 
   # Airflow install settings
-  $version                   = '1.6.2'
+  $version                   = '1.10.5'
   $package_name              = 'airflow'
 
   # User and group settings
@@ -57,10 +57,10 @@ class airflow::params {
 
   ## Celery settings
   $celery_app_name           = 'airflow.executors.celery_executor'
-  $celeryd_concurrency       = 16
+  $worker_concurrency        = 16
   $worker_log_server_port    = 8793
   $broker_url                = 'sqla+mysql://airflow:airflow@localhost:3306/airflow'
-  $celery_result_backend     = 'db+mysql://airflow:airflow@localhost:3306/airflow'
+  $result_backend            = 'db+mysql://airflow:airflow@localhost:3306/airflow'
   $flower_port               = 5555
   $default_queue             = 'default'
 
