@@ -33,6 +33,7 @@ airflow::worker_class: 'sync'
 airflow::expose_config: true
 airflow::authenticate: false
 airflow::auth_backend: null
+airflow::auth_user_registration_role: null
 airflow::filter_by_owner: false
 airflow::smtp_host: 'localhost'
 airflow::smtp_starttls: true

@@ -75,6 +75,10 @@
 # [*auth_details*]
 #   Authentication settings. It could be a hash (LDAP), or an array of hashes,
 #   such as for OAUTH and OPENID, which accept multiple services.
+# [*auth_user_registration_role*]
+#   Self-registration role. Only if this is set, users will be allowed to
+#   register themselves. Should be enabled with OAUTH(and maybe others?), unless
+#   you know the correct information to input.
 # [*filter_by_owner*]
 #   Filter the list of dags by owner name
 #   (requires authentication to be enabled).
@@ -183,6 +187,8 @@ class airflow (
   $expose_config,
   $authenticate,
   $auth_backend,
+  $auth_user_registration_role,
+
   $filter_by_owner,
 
   ## Mail settings
