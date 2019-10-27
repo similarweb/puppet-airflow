@@ -100,6 +100,9 @@ auth_backend = <%= @auth_backend %>
 # Filter the list of dags by owner name (requires authentication to be enabled)
 filter_by_owner = <%= @filter_by_owner %>
 
+# Enable werkzeug `ProxyFix` middleware
+enable_proxy_fix = <%= @proxy_fix -%>
+
 [smtp]
 # If you want airflow to send emails on retries, failure, and you want to
 # the airflow.utils.send_email function, you have to configure an smtp
@@ -159,7 +162,15 @@ broker_url = <%= @broker_url %>
 result_backend = <%= @result_backend %>
 
 # Celery Flower is a sweet UI for Celery. Airflow has a shortcut to start
-# it `airflow flower`. This defines the port that Celery Flower runs on
+# it `airflow flower`. This defines the IP that Celery Flower runs on
+flower_host = <%= @web_server_host %>
+
+# The root URL for Flower
+# Ex: flower_url_prefix = /flower
+# https://airflow.apache.org/howto/run-behind-proxy.html
+flower_url_prefix = <%= @flower_prefix %>
+
+# This defines the port that Celery Flower runs on
 flower_port = <%= @flower_port %>
 
 # Default queue that tasks get assigned to and that worker listen on.

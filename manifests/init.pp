@@ -48,6 +48,12 @@
 #   The base url of your website as airflow cannot guess what domain or
 #   cname you are using. This is use in automated emails that
 #   airflow sends to point links to the right web server.
+# [*proxy_fix*]
+#   To ensure that Airflow generates URLs with the correct scheme when running
+#   behind a TLS-terminating proxy, you should configure the proxy to set the
+#   X-Forwarded-Proto header, and enable this.
+#   Note: You should only enable the ProxyFix middleware when running Airflow
+#         behind a trusted proxy (AWS ELB, nginx, etc.).
 # [*web_server_host*]
 #   The ip specified when starting the web server.
 # [*web_server_port*]
@@ -169,6 +175,7 @@ class airflow (
 
   ## Webserver settings
   $base_url,
+  $proxy_fix,
   $web_server_host,
   $web_server_port,
   $secret_key,
@@ -233,6 +240,7 @@ class airflow (
   validate_integer($flower_port)
   validate_integer($smtp_port)
 
+  validate_bool($proxy_fix)
   validate_bool($service_enable)
   validate_bool($authenticate)
   validate_bool($filter_by_owner)

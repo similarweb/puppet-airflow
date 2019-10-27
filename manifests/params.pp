@@ -37,6 +37,7 @@ class airflow::params {
 
   ## Webserver settings
   $base_url                  = 'http://localhost'
+  $proxy_fix                 = false
   $web_server_host           = '0.0.0.0'
   $web_server_port           = 8080
   $secret_key                = 'temporary_key'
@@ -61,6 +62,7 @@ class airflow::params {
   $worker_log_server_port    = 8793
   $broker_url                = 'sqla+mysql://airflow:airflow@localhost:3306/airflow'
   $result_backend            = 'db+mysql://airflow:airflow@localhost:3306/airflow'
+  $flower_prefix             = ''
   $flower_port               = 5555
   $default_queue             = 'default'
 

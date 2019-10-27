@@ -24,6 +24,7 @@ airflow::plugins_folder: "%{lookup('airflow::home_folder')}/plugins"
 airflow::fernet_key: 'cryptography_not_found_storing_passwords_in_plain_text'
 airflow::donot_pickle: false
 airflow::base_url: 'http://localhost'
+airflow::proxy_fix: false
 airflow::web_server_host: '0.0.0.0'
 airflow::web_server_port: 8080
 airflow::secret_key: 'temporary_key'
@@ -44,6 +45,7 @@ airflow::worker_concurrency: 16
 airflow::worker_log_server_port: 8793
 airflow::broker_url: 'sqla+mysql://airflow:airflow@localhost:3306/airflow'
 airflow::result_backend: 'db+mysql://airflow:airflow@localhost:3306/airflow'
+airflow::flower_prefix: ''
 airflow::flower_port: 5555
 airflow::default_queue: 'default'
 airflow::catchup: false
