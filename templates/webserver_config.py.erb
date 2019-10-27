@@ -42,5 +42,5 @@ AUTH_TYPE = AUTH_<%= @auth_backend.upcase %>
 AUTH_LDAP_<%= key.upcase %> = <%= value -%>
 <% end -%>
 <% elsif ['OAUTH', 'OPENID'].include?(@auth_backend) -%>
-<%= @auth_backend %>_PROVIDERS = <%= @auth_details.to_json %>
+<%= @auth_backend %>_PROVIDERS = <%= @auth_details.to_json.gsub(/\bnull\b/, 'None') %>
 <% end -%>
