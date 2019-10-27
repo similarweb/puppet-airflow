@@ -31,4 +31,13 @@ class airflow::config inherits airflow {
     mode    => '0755',
     require =>  [Class[airflow::install], File[$airflow::home_folder]]
   }
+  if $airflow::authenticate {
+    # Setup webserver_config.py for RBAC
+    file { "${airflow::home_folder}/webserver_config.py":
+      ensure  => 'file',
+      content => template("${module_name}/webserver_config.py.erb"),
+      mode    => '0755',
+      require =>  [Class[airflow::install], File[$airflow::home_folder]]
+    }
+  }
 }

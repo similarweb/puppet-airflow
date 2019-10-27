@@ -106,15 +106,26 @@ class { 'airflow::service::worker':
 }
 ```
 
+## RBAC-based Security
+
+The new way to authenticate is based on FAB's RBAC plugin, so the details on
+available keys are split between [FAB][9] and [Airflow][10].
+There is also Airflow's [documentation][11], but it's more useful for the details on the difference between regular
+FAB/RBAC and what Airflow does with it.
+
+To set it up in the module, set `authenticate` to true, `auth_backend` to the authentication type (LDAP, OAUTH, etc),
+and `auth_details` for all the options. Be careful that OAUTH and OPENID take arrays of service hashes.
+
 ## Hiera Support
 
 * Example: Defining ldap authentication and mesos settings in hiera.
 
 ```yaml
-airflow::ldap_settings:
-  ldap_url: ldap:://<your.ldap.server>:<port>
+airflow::authenticate: true
+airflow::auth_backend: LDAP
+airflow::auth_details:
+  server: ldap:://<your.ldap.server>:<port>
   user_filter: objectClass=*
-  user_name_attr: uid
   bind_user: cn=Manager,dc=example,dc=com
   bind_password: insecure
   basedn: dc=example,dc=com
@@ -165,3 +176,6 @@ airflow::mesos_settings:
 [6]: https://github.com/puppetlabs/puppetlabs-mysql
 [7]: https://github.com/puppetlabs/puppetlabs-rabbitmq
 [8]: https://github.com/garethr/garethr-erlang
+[9]: http://flask-appbuilder.readthedocs.io/en/latest/security.html#authentication-methods
+[10]: https://github.com/apache/airflow/blob/master/airflow/config_templates/default_webserver_config.py
+[11]: https://airflow.apache.org/security.html#rbac-ui-security

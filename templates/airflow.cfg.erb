@@ -75,27 +75,9 @@ worker_class = <%= @worker_class %>
 # Expose the configuration file in the web server
 expose_config = <%= @expose_config %>
 
-# Set to true to turn on authentication : https://airflow.apache.org/security.html#web-authentication
-authenticate = <%= @authenticate %>
-
-<% if @authenticate -%>
-
-# Set authentication backend
-auth_backend = <%= @auth_backend %>
-
-<% if !@ldap_settings.empty? -%>
-[ldap]<% @ldap_settings.each do |key, value| %>
-<%= key %> = <%= value -%>
-<% end %>
-<% end -%>
-
-<% if !@google_settings.empty? -%>
-[google]<% @google_settings.each do |key, value| %>
-<%= key %> = <%= value -%>
-<% end %>
-<% end -%>
-<% end -%>
-
+# Use FAB-based webserver with RBAC authentication
+# Settings are kept in webserver_config.py
+rbac = <%= @authenticate %>
 
 # Filter the list of dags by owner name (requires authentication to be enabled)
 filter_by_owner = <%= @filter_by_owner %>

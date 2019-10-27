@@ -51,7 +51,6 @@ airflow::default_queue: 'default'
 airflow::catchup: false
 airflow::job_heartbeat_sec: 5
 airflow::scheduler_heartbeat_sec: 5
-airflow::ldap_settings: {}
-airflow::google_settings: {}
+airflow::auth_details: {}
 airflow::statsd_settings: {}
 airflow::mesos_settings: {}

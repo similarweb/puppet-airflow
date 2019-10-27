@@ -69,9 +69,12 @@
 #   Expose the configuration file in the web server.
 # [*authenticate*]
 #   Set to true to turn on authentication.
-#   https://airflow.apache.org/security.html#web-authentication
+#   https://airflow.apache.org/security.html#rbac-ui-security
 # [*auth_backend*]
 #   Airflow Authentication Backend, for example LDAP.
+# [*auth_details*]
+#   Authentication settings. It could be a hash (LDAP), or an array of hashes,
+#   such as for OAUTH and OPENID, which accept multiple services.
 # [*filter_by_owner*]
 #   Filter the list of dags by owner name
 #   (requires authentication to be enabled).
@@ -125,10 +128,6 @@
 ###### Puppet hashes ######
 # [*statsd_settings*]
 #   Statsd settings dictionary.
-# [*ldap_settings*]
-#   ldap settings dictionary.
-# [*google_settings*]
-#   Google Oauth2 settings dictionary.
 # [*mesos_settings*]
 #   mesos settings dictionary.
 
@@ -208,12 +207,9 @@ class airflow (
   $job_heartbeat_sec,
   $scheduler_heartbeat_sec,
 
-  ### START hiera lookups ###
   $statsd_settings,
-  $ldap_settings,
-  $google_settings,
+  $auth_details,
   $mesos_settings,
-  ### END hiera lookups ###
 ) {
   validate_string($user)
   validate_string($group)

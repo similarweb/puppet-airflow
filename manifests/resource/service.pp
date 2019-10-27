@@ -9,14 +9,18 @@ define airflow::resource::service($service_name = $name) {
     notify  => Service[$service_name],
     require => [Class[airflow::install], File[$airflow::log_folder]]
   }
+  $auth_dependency = $airflow::authenticate ? {
+    true    => [File["${airflow::home_folder}/webserver_config.py"]],
+    default => [],
+  }
+
   service { $service_name:
     ensure    => $airflow::service_ensure,
     enable    => $airflow::service_enable,
     require   => [Exec['systemctl-daemon-reload']],
-    subscribe =>
-    [
+    subscribe => [
       Systemd::Unit_file["${service_name}.service"],
-      File["${airflow::home_folder}/airflow.cfg"]
-    ]
+      File["${airflow::home_folder}/airflow.cfg"],
+    ] + $auth_dependency
   }
 }
