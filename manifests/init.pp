@@ -111,6 +111,8 @@
 #   The celery result backend setting.
 # [*flower_port*]
 #   Celery flower is a sweet UI for celery.
+# [*flower_url_prefix*]
+#   Root prefix for Flower, if it's behind the same proxy as Airflow.
 # [*default_queue*]
 #   Default queue that tasks get assigned to and that worker listen on.
 ###### Scheduler settings ######
@@ -206,6 +208,7 @@ class airflow (
   $broker_url,
   $result_backend,
   $flower_port,
+  $flower_url_prefix,
   $default_queue,
 
   ## Scheduler settings
@@ -224,6 +227,7 @@ class airflow (
   validate_string($virtualenv)
   validate_string($worker_class)
   validate_string($folders_mode)
+  validate_string($flower_url_prefix)
 
   validate_absolute_path($log_folder)
   validate_absolute_path($run_folder)

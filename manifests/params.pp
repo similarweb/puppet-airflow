@@ -63,8 +63,8 @@ class airflow::params {
   $worker_log_server_port      = 8793
   $broker_url                  = 'sqla+mysql://airflow:airflow@localhost:3306/airflow'
   $result_backend              = 'db+mysql://airflow:airflow@localhost:3306/airflow'
-  $flower_prefix               = ''
   $flower_port                 = 5555
+  $flower_url_prefix           = undef
   $default_queue               = 'default'
 
   ## Scheduler settings
