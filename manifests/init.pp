@@ -123,6 +123,9 @@
 # Command Line Backfills still work, but the scheduler
 # will not do scheduler catchup if this is False,
 # however it can be set on a per DAG basis in the
+# [*dag_dir_list_interval*]
+#   How often (in seconds) to scan the DAGs directory for new files. Default
+#   to 5 minutes.
 # [*job_heartbeat_sec*]
 #   Task instances listen for external kill signal (when you clear tasks
 #   from the CLI or the UI), this defines the frequency at which they should
@@ -213,6 +216,7 @@ class airflow (
 
   ## Scheduler settings
   $catchup,
+  $dag_dir_list_interval,
   $job_heartbeat_sec,
   $scheduler_heartbeat_sec,
 
@@ -238,6 +242,7 @@ class airflow (
   validate_integer($parallelism)
   validate_integer($dag_concurrency)
   validate_integer($max_active_runs_per_dag)
+  validate_integer($dag_dir_list_interval)
   validate_integer($job_heartbeat_sec)
   validate_integer($scheduler_heartbeat_sec)
   validate_integer($web_server_port)

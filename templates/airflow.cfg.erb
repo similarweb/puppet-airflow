@@ -159,6 +159,9 @@ flower_port = <%= @flower_port %>
 default_queue = <%= @default_queue %>
 
 [scheduler]
+# How often (in seconds) to scan the DAGs directory for new files. Default to 5 minutes.
+dag_dir_list_interval = <%= @dag_dir_list_interval %>
+
 # Task instances listen for external kill signal (when you clear tasks
 # from the CLI or the UI), this defines the frequency at which they should
 # listen (in seconds).
