@@ -23,7 +23,7 @@ class airflow::params {
   ## Core settings
   $home_folder                 = '/opt/airflow'
   $dags_folder                 = "${home_folder}/dags"
-  $s3_log_folder               = 'None'
+  $remote_base_log_folder      = 'None'
   $executor                    = 'CeleryExecutor'
   $sql_alchemy_conn            = "sqlite:////${home_folder}/airflow.db"
   $parallelism                 = 32

@@ -8,9 +8,13 @@ dags_folder = <%= @dags_folder %>
 # The folder where airflow should store its log files
 # This path must be absolute
 base_log_folder = <%= @log_folder %>
-# An S3 location can be provided for log backups
-# For S3, use the full URL to the base folder (starting with "s3://...")
-s3_log_folder = <%= @s3_log_folder %>
+
+# Airflow can store logs remotely in AWS S3, Google Cloud Storage or Elastic Search.
+# Users must supply an Airflow connection id that provides access to the storage
+# location. See UPDATING.md for additional configuration requirements.
+remote_logging = <%= !@remote_log_conn_id.nil? %>
+remote_log_conn_id = <%= @remote_log_conn_id %>
+remote_base_log_folder = <%= @remote_base_log_folder %>
 
 # The executor class that airflow should use. Choices include
 # SequentialExecutor, LocalExecutor, CeleryExecutor, DaskExecutor, KubernetesExecutor

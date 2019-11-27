@@ -20,8 +20,11 @@
 # [*dags_folder*]
 #   The folder where your airflow pipelines live,
 #   defaults to `/opt/airflow/dags`.
-# [*s3_log_folder*]
-#   An S3 location can be provided for log backups
+# [*remote_log_conn_id*]
+#   A connection to use to access remote_base_log_folder
+#   Will enable `remote_logging` if provided
+# [*remote_base_log_folder*]
+#   A remote location can be provided for log backups
 #   For S3, use the full URL to the base folder (starting with "s3://...").
 # [*executor*]
 #   The executor class that airflow should use, defaults to `CeleryExecutor`.
@@ -170,7 +173,8 @@ class airflow (
   ## Core settings
   $home_folder,
   $dags_folder,
-  $s3_log_folder,
+  $remote_log_conn_id,
+  $remote_base_log_folder,
   $executor,
   $sql_alchemy_conn,
   $parallelism,
@@ -232,6 +236,8 @@ class airflow (
   validate_string($worker_class)
   validate_string($folders_mode)
   validate_string($flower_url_prefix)
+  validate_string($remote_log_conn_id)
+  validate_string($remote_base_log_folder)
 
   validate_absolute_path($log_folder)
   validate_absolute_path($run_folder)
