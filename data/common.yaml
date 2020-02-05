@@ -56,3 +56,6 @@ airflow::scheduler_heartbeat_sec: 5
 airflow::auth_details: {}
 airflow::statsd_settings: {}
 airflow::mesos_settings: {}
+airflow::scheduler_log_level: null
+airflow::webserver_log_level: null
+airflow::worker_log_level: null

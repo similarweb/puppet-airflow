@@ -227,6 +227,11 @@ class airflow (
   $statsd_settings,
   $auth_details,
   $mesos_settings,
+
+  ## Log level override settings
+  $scheduler_log_level,
+  $webserver_log_level,
+  $worker_log_level,
 ) {
   validate_string($user)
   validate_string($group)
@@ -238,6 +243,9 @@ class airflow (
   validate_string($flower_url_prefix)
   validate_string($remote_log_conn_id)
   validate_string($remote_base_log_folder)
+  validate_string($scheduler_log_level)
+  validate_string($webserver_log_level)
+  validate_string($worker_log_level)
 
   validate_absolute_path($log_folder)
   validate_absolute_path($run_folder)

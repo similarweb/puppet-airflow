@@ -8,6 +8,9 @@ PIDFile = <%= scope['airflow::run_folder'] %>/airflow_scheduler.pid
 ExecStart=/bin/sh -c '. <%= @cmd_path %>/bin/activate; exec airflow scheduler'
 ExecReload=/bin/kill -HUP $MAINPID
 Environment="AIRFLOW_HOME=<%= scope['airflow::home_folder'] %>"
+<% if scope['airflow::scheduler_log_level'] %>
+Environment="AIRFLOW__CORE__LOGGING_LEVEL=<%= scope['airflow::scheduler_log_level'] %>"
+<% end %>
 KillMode=process
 Restart=on-failure
 RestartSec=15s
