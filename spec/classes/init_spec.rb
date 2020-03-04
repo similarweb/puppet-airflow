@@ -23,6 +23,14 @@ describe 'airflow', type: :class do
       it { is_expected.to_not contain_python__pip('apache-airflow') }
     end
 
+    context 'with virtualenv requirements but disabled install management' do
+      let(:params) { { requirements: 'requirements.txt', manage_install: false } }
+      it { should compile }
+      it { is_expected.to contain_class('airflow') }
+      it { is_expected.to_not contain_python__virtualenv('airflow') }
+      it { is_expected.to_not contain_python__pip('apache-airflow') }
+    end
+
     context 'with authentication' do
       let(:params) {
         {

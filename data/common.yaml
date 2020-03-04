@@ -6,6 +6,7 @@ airflow::package_name: 'apache-airflow'
 airflow::user: 'airflow'
 airflow::group: 'airflow'
 airflow::folders_mode: '0775'
+airflow::manage_install: true
 airflow::virtualenv: 'airflow'
 airflow::requirements: false
 airflow::python: 'system'

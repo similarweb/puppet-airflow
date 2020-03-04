@@ -156,6 +156,7 @@ class airflow (
   # Airflow install settings
   $version,
   $package_name,
+  $manage_install,
   $virtualenv,
   $requirements,
   $python,
