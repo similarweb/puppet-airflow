@@ -53,3 +53,5 @@ airflow::scheduler_heartbeat_sec: 5
 airflow::ldap_settings: {}
 airflow::statsd_settings: {}
 airflow::mesos_settings: {}
+airflow::remote_log_conn_id: null
+airflow::remote_base_log_folder: null
