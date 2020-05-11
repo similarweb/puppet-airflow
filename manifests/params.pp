@@ -34,6 +34,7 @@ class airflow::params {
   $fernet_key                  =
     'cryptography_not_found_storing_passwords_in_plain_text'
   $donot_pickle                = false
+  $hostname_callable           = 'socket.getfqdn'
 
   ## Webserver settings
   $base_url                    = 'http://localhost'

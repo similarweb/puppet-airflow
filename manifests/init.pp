@@ -46,6 +46,9 @@
 #   Secret key to save connection passwords in the db.
 # [*donot_pickle*]
 #   Whether to disable pickling dags.
+# [*hostname_callable*]
+#   Hostname by providing a path to a callable, which will resolve the hostname.
+#   The format is "package.function".
 ###### Webserver settings ######
 # [*base_url*]
 #   The base url of your website as airflow cannot guess what domain or
@@ -184,6 +187,7 @@ class airflow (
   $load_examples,
   $fernet_key,
   $donot_pickle,
+  $hostname_callable,
   $plugins_folder,
 
   ## Webserver settings
@@ -242,6 +246,7 @@ class airflow (
   validate_string($worker_class)
   validate_string($folders_mode)
   validate_string($flower_url_prefix)
+  validate_string($hostname_callable)
   validate_string($remote_log_conn_id)
   validate_string($remote_base_log_folder)
   validate_string($scheduler_log_level)

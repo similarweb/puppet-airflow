@@ -50,6 +50,16 @@ fernet_key = <%= @fernet_key %>
 # Whether to disable pickling dags
 donot_pickle = <%= @donot_pickle %>
 
+# Hostname by providing a path to a callable, which will resolve the hostname.
+# The format is "package.function".
+#
+# For example, default value "socket.getfqdn" means that result from getfqdn() of "socket"
+# package will be used as hostname.
+#
+# No argument should be required in the function specified.
+# If using IP address as hostname is preferred, use value ``airflow.utils.net.get_host_ip_address``
+hostname_callable = <%= @hostname_callable %>
+
 [webserver]
 # The base url of your website as airflow cannot guess what domain or
 # cname you are using. This is used in automated emails that

@@ -24,6 +24,7 @@ airflow::load_examples: false
 airflow::plugins_folder: "%{lookup('airflow::home_folder')}/plugins"
 airflow::fernet_key: 'cryptography_not_found_storing_passwords_in_plain_text'
 airflow::donot_pickle: false
+airflow::hostname_callable: 'socket.getfqdn'
 airflow::base_url: 'http://localhost'
 airflow::proxy_fix: false
 airflow::web_server_host: '0.0.0.0'
