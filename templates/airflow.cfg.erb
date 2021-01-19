@@ -186,6 +186,9 @@ job_heartbeat_sec = <%= @job_heartbeat_sec %>
 # how often the scheduler should run (in seconds).
 scheduler_heartbeat_sec = <%= @scheduler_heartbeat_sec %>
 
+# Threads count used by scheduler, default: 2
+max_threads = <%= @scheduler_max_threads %>
+
 # Turn off scheduler catchup by setting this to False.
 # Default behavior is unchanged and
 # Command Line Backfills still work, but the scheduler

@@ -55,6 +55,7 @@ airflow::catchup: false
 airflow::dag_dir_list_interval: 300
 airflow::job_heartbeat_sec: 5
 airflow::scheduler_heartbeat_sec: 5
+airflow::scheduler_max_threads: 2
 airflow::auth_details: {}
 airflow::statsd_settings: {}
 airflow::mesos_settings: {}
