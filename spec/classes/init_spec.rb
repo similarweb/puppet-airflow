@@ -6,6 +6,7 @@ describe 'airflow', type: :class do
       it { is_expected.to contain_class('airflow') }
       it { should contain_python__virtualenv('airflow') }
       it { is_expected.to contain_python__pip('apache-airflow') }
+      it { should contain_file("/opt/airflow/airflow.cfg").with_content(/max_threads = 4/) }
     end
 
     context 'with virtualenv requirements' do
