@@ -51,6 +51,7 @@ airflow::default_queue: 'default'
 airflow::catchup: false
 airflow::job_heartbeat_sec: 5
 airflow::scheduler_heartbeat_sec: 5
+airflow::scheduler_max_threads: 4
 airflow::ldap_settings: {}
 airflow::statsd_settings: {}
 airflow::mesos_settings: {}

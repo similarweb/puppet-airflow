@@ -73,6 +73,7 @@ class airflow::params {
   $dag_dir_list_interval       = 300
   $job_heartbeat_sec           = 5
   $scheduler_heartbeat_sec     = 5
+  $scheduler_max_threads       = 2
 
   $auth_details                = {}
   $statsd_settings             = {}

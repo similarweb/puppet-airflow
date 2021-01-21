@@ -228,7 +228,7 @@ class airflow (
   $dag_dir_list_interval,
   $job_heartbeat_sec,
   $scheduler_heartbeat_sec,
-
+  $scheduler_max_threads,
   $statsd_settings,
   $auth_details,
   $mesos_settings,
@@ -265,6 +265,7 @@ class airflow (
   validate_integer($dag_dir_list_interval)
   validate_integer($job_heartbeat_sec)
   validate_integer($scheduler_heartbeat_sec)
+  validate_integer($scheduler_max_threads)
   validate_integer($web_server_port)
   validate_integer($worker_concurrency)
   validate_integer($worker_log_server_port)
