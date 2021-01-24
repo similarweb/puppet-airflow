@@ -107,6 +107,10 @@
 # [*worker_concurrency*]
 #   The concurrency that will be used when starting workers with the
 #   "airflow worker" command.
+# [*worker_autoscale*]
+#   The maximum and minimum concurrency that will be used when starting workers
+#   with the "airflow worker" command.
+#   Overrides *worker_concurrency*.
 # [*worker_log_server_port*]
 #   When you start an airflow worker, airflow starts a tiny web server
 #   subprocess to serve the workers local log files to the airflow main
@@ -216,6 +220,7 @@ class airflow (
   ## Celery settings
   $celery_app_name,
   $worker_concurrency,
+  $worker_autoscale,
   $worker_log_server_port,
   $broker_url,
   $result_backend,
@@ -271,6 +276,8 @@ class airflow (
   validate_integer($worker_log_server_port)
   validate_integer($flower_port)
   validate_integer($smtp_port)
+
+  validate_re($worker_autoscale, ['^UNDEFINED$', '^[0-9]+,[0-9]+$'], "Airflow[${name}]: worker_autoscale must be of the format max,min")
 
   validate_bool($proxy_fix)
   validate_bool($service_enable)

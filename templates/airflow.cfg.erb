@@ -135,6 +135,9 @@ celery_app_name = <%= @celery_app_name %>
 # a worker will take, so size up your workers based on the resources on
 # your worker box and the nature of your tasks
 worker_concurrency = <%= @worker_concurrency %>
+<% if @worker_autoscale %>
+worker_autoscale = <%= @worker_autoscale %>
+<% end %>
 
 # When you start an airflow worker, airflow starts a tiny web server
 # subprocess to serve the workers local log files to the airflow main

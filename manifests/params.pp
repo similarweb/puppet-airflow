@@ -61,6 +61,7 @@ class airflow::params {
   ## Celery settings
   $celery_app_name             = 'airflow.executors.celery_executor'
   $worker_concurrency          = 16
+  $worker_autoscale            = undef
   $worker_log_server_port      = 8793
   $broker_url                  = 'sqla+mysql://airflow:airflow@localhost:3306/airflow'
   $result_backend              = 'db+mysql://airflow:airflow@localhost:3306/airflow'
