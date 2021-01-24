@@ -30,6 +30,14 @@
 #   The executor class that airflow should use, defaults to `CeleryExecutor`.
 # [*sql_alchemy_conn*]
 #   The SQLAlchemy connection string to the metadata database.
+# [*sql_alchemy_pool_size*]
+#   The SqlAlchemy pool size is the maximum number of database connections in
+#   the pool. 0 indicates no limit.
+# [*sql_alchemy_max_overflow*]
+#   The maximum overflow size of the pool.
+# [*sql_alchemy_pool_recycle*]
+#   The number of seconds a connection can be idle in the pool before it is
+#   invalidated.
 # [*parallelism*]
 #   The amount of parallelism as a setting to the executor,
 #   defaults to `32`.
@@ -185,6 +193,9 @@ class airflow (
   $remote_base_log_folder,
   $executor,
   $sql_alchemy_conn,
+  $sql_alchemy_pool_size,
+  $sql_alchemy_max_overflow,
+  $sql_alchemy_pool_recycle,
   $parallelism,
   $dag_concurrency,
   $max_active_runs_per_dag,
@@ -264,6 +275,9 @@ class airflow (
   validate_absolute_path($dags_folder)
   validate_absolute_path($plugins_folder)
 
+  validate_integer($sql_alchemy_pool_size)
+  validate_integer($sql_alchemy_max_overflow)
+  validate_integer($sql_alchemy_pool_recycle)
   validate_integer($parallelism)
   validate_integer($dag_concurrency)
   validate_integer($max_active_runs_per_dag)

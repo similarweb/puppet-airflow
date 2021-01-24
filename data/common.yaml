@@ -17,6 +17,9 @@ airflow::dags_folder: "%{lookup('airflow::home_folder')}/dags"
 airflow::s3_log_folder: 'None'
 airflow::executor: 'CeleryExecutor'
 airflow::sql_alchemy_conn: "sqlite:////%{lookup('airflow::home_folder')}/airflow.db"
+airflow::sql_alchemy_pool_size: 5
+airflow::sql_alchemy_max_overflow: 10
+airflow::sql_alchemy_pool_recycle: 1800
 airflow::parallelism: 32
 airflow::dag_concurrency: 16
 airflow::max_active_runs_per_dag: 16

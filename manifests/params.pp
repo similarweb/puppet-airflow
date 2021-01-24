@@ -26,6 +26,9 @@ class airflow::params {
   $remote_base_log_folder      = 'None'
   $executor                    = 'CeleryExecutor'
   $sql_alchemy_conn            = "sqlite:////${home_folder}/airflow.db"
+  $sql_alchemy_pool_size       = 5
+  $sql_alchemy_max_overflow    = 10
+  $sql_alchemy_pool_recycle    = 1800
   $parallelism                 = 32
   $dag_concurrency             = 16
   $max_active_runs_per_dag     = 16
