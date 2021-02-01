@@ -5,20 +5,23 @@ class airflow::install inherits airflow {
   if $airflow::manage_install {
     # Create virtualenv for airflow
     ensure_resource(
-      python::virtualenv,
+      python::pyvenv,
       $airflow::virtualenv,
       {
         ensure       => present,
         version      => $airflow::python,
         systempkgs   => true,
         venv_dir     => "/home/${airflow::user}/venv/${airflow::virtualenv}",
-        requirements => $airflow::requirements,
         owner        => $airflow::user,
         group        => $airflow::group,
       }
     )
 
-    if ! $airflow::requirements {
+    if $airflow::requirements {
+      python::requirements { $airflow::requirements:
+        manage_requirements => false,
+      }
+    } else {
       # Use pip
       ensure_resource(
         python::pip,

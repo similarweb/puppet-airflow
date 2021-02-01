@@ -4,7 +4,7 @@ describe 'airflow', type: :class do
     let(:facts) { facts }
     context 'with defaults for all parameters' do
       it { is_expected.to contain_class('airflow') }
-      it { should contain_python__virtualenv('airflow') }
+      it { should contain_python__pyvenv('airflow') }
       it { is_expected.to contain_python__pip('apache-airflow') }
       it { should contain_file("/opt/airflow/airflow.cfg").with_content(/max_threads = 4/) }
     end
@@ -12,7 +12,7 @@ describe 'airflow', type: :class do
     context 'with virtualenv requirements' do
       let(:params) { { requirements: 'requirements.txt' } }
       it { is_expected.to contain_class('airflow') }
-      it { is_expected.to contain_python__virtualenv('airflow') }
+      it { is_expected.to contain_python__pyvenv('airflow') }
       it { is_expected.to_not contain_python__pip('apache-airflow') }
     end
 
@@ -20,7 +20,7 @@ describe 'airflow', type: :class do
       let(:hieradata) { 'reqs' }
       it { should compile }
       it { is_expected.to contain_class('airflow') }
-      it { is_expected.to contain_python__virtualenv('airflow') }
+      it { is_expected.to contain_python__pyvenv('airflow') }
       it { is_expected.to_not contain_python__pip('apache-airflow') }
     end
 
@@ -28,7 +28,7 @@ describe 'airflow', type: :class do
       let(:params) { { requirements: 'requirements.txt', manage_install: false } }
       it { should compile }
       it { is_expected.to contain_class('airflow') }
-      it { is_expected.to_not contain_python__virtualenv('airflow') }
+      it { is_expected.to_not contain_python__pyvenv('airflow') }
       it { is_expected.to_not contain_python__pip('apache-airflow') }
     end
 
