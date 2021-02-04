@@ -58,6 +58,7 @@ airflow::default_queue: 'default'
 airflow::catchup: false
 airflow::dag_dir_list_interval: 300
 airflow::job_heartbeat_sec: 5
+airflow::print_stats_interval: 30
 airflow::scheduler_heartbeat_sec: 5
 airflow::scheduler_max_threads: 2
 airflow::auth_details: {}

@@ -148,6 +148,9 @@
 #   Task instances listen for external kill signal (when you clear tasks
 #   from the CLI or the UI), this defines the frequency at which they should
 #   listen (in seconds).
+# [*print_stats_interval*]
+#   How often should stats be printed to the logs. Setting to 0 will disable
+#   printing stats
 # [*scheduler_heartbeat_sec*]
 #   The scheduler constantly tries to trigger new tasks (look at the
 #   scheduler section in the docs for more information). This defines
@@ -243,6 +246,7 @@ class airflow (
   $catchup,
   $dag_dir_list_interval,
   $job_heartbeat_sec,
+  $print_stats_interval,
   $scheduler_heartbeat_sec,
   $scheduler_max_threads,
   $statsd_settings,
@@ -283,6 +287,7 @@ class airflow (
   validate_integer($max_active_runs_per_dag)
   validate_integer($dag_dir_list_interval)
   validate_integer($job_heartbeat_sec)
+  validate_integer($print_stats_interval)
   validate_integer($scheduler_heartbeat_sec)
   validate_integer($scheduler_max_threads)
   validate_integer($web_server_port)

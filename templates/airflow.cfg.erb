@@ -205,6 +205,9 @@ dag_dir_list_interval = <%= @dag_dir_list_interval %>
 # listen (in seconds).
 job_heartbeat_sec = <%= @job_heartbeat_sec %>
 
+# How often should stats be printed to the logs. Setting to 0 will disable printing stats
+print_stats_interval = <%= @print_stats_interval %>
+
 # The scheduler constantly tries to trigger new tasks (look at the
 # scheduler section in the docs for more information). This defines
 # how often the scheduler should run (in seconds).
