@@ -57,6 +57,8 @@ airflow::flower_port: 5555
 airflow::default_queue: 'default'
 airflow::catchup: false
 airflow::dag_dir_list_interval: 300
+airflow::dagbag_import_timeout: 30
+airflow::dag_file_processor_timeout: 50
 airflow::job_heartbeat_sec: 5
 airflow::print_stats_interval: 30
 airflow::scheduler_heartbeat_sec: 5

@@ -38,6 +38,8 @@ class airflow::params {
     'cryptography_not_found_storing_passwords_in_plain_text'
   $donot_pickle                = false
   $hostname_callable           = 'socket.getfqdn'
+  $dagbag_import_timeout       = 30
+  $dag_file_processor_timeout  = 50
 
   ## Webserver settings
   $base_url                    = 'http://localhost'

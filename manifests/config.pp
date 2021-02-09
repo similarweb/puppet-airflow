@@ -3,6 +3,8 @@
 # AIRFLOW_HOME environment variable and airflow.cfg file. 
 #
 class airflow::config inherits airflow {
+  $newer_version = versioncmp($version, '1.10.5') == 1
+
   # Create airflow folders
   $airflow_app_folders =
   [

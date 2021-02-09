@@ -57,6 +57,10 @@
 # [*hostname_callable*]
 #   Hostname by providing a path to a callable, which will resolve the hostname.
 #   The format is "package.function".
+# [*dagbag_import_timeout*]
+#   How long before timing out a python file import.
+# [*dag_file_processor_timeout*]
+#   How long before timing out a DagFileProcessor, which processes a dag file.
 ###### Webserver settings ######
 # [*base_url*]
 #   The base url of your website as airflow cannot guess what domain or
@@ -207,6 +211,8 @@ class airflow (
   $donot_pickle,
   $hostname_callable,
   $plugins_folder,
+  $dagbag_import_timeout,
+  $dag_file_processor_timeout,
 
   ## Webserver settings
   $base_url,
@@ -286,6 +292,8 @@ class airflow (
   validate_integer($dag_concurrency)
   validate_integer($max_active_runs_per_dag)
   validate_integer($dag_dir_list_interval)
+  validate_integer($dagbag_import_timeout)
+  validate_integer($dag_file_processor_timeout)
   validate_integer($job_heartbeat_sec)
   validate_integer($print_stats_interval)
   validate_integer($scheduler_heartbeat_sec)
