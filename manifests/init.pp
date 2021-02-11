@@ -228,6 +228,7 @@ class airflow (
   $auth_user_registration_role,
 
   $filter_by_owner,
+  $log_fetch_timeout_sec,
 
   ## Mail settings
   $smtp_host,
@@ -258,6 +259,7 @@ class airflow (
   $statsd_settings,
   $auth_details,
   $mesos_settings,
+  $run_duration,
 
   ## Log level override settings
   $scheduler_log_level,
@@ -295,7 +297,9 @@ class airflow (
   validate_integer($dagbag_import_timeout)
   validate_integer($dag_file_processor_timeout)
   validate_integer($job_heartbeat_sec)
+  validate_integer($log_fetch_timeout_sec)
   validate_integer($print_stats_interval)
+  validate_integer($run_duration)
   validate_integer($scheduler_heartbeat_sec)
   validate_integer($scheduler_max_threads)
   validate_integer($web_server_port)

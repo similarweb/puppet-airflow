@@ -54,6 +54,7 @@ class airflow::params {
   $auth_backend                = undef
   $auth_user_registration_role = undef
   $filter_by_owner             = false
+  $log_fetch_timeout_sec       = 5
 
   ## Mail settings
   $smtp_host                   = 'localhost'
@@ -81,6 +82,7 @@ class airflow::params {
   $print_stats_interval        = 30
   $scheduler_heartbeat_sec     = 5
   $scheduler_max_threads       = 2
+  $run_duration                = -1
 
   $auth_details                = {}
   $statsd_settings             = {}

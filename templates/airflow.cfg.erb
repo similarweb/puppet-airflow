@@ -118,6 +118,10 @@ worker_class = <%= @worker_class %>
 # Expose the configuration file in the web server
 expose_config = <%= @expose_config %>
 
+# The amount of time (in secs) webserver will wait for initial handshake while
+# fetching logs from other worker machine
+log_fetch_timeout_sec = <%= @log_fetch_timeout_sec %>
+
 # Use FAB-based webserver with RBAC authentication
 # Settings are kept in webserver_config.py
 rbac = <%= @authenticate %>
@@ -220,6 +224,10 @@ print_stats_interval = <%= @print_stats_interval %>
 # scheduler section in the docs for more information). This defines
 # how often the scheduler should run (in seconds).
 scheduler_heartbeat_sec = <%= @scheduler_heartbeat_sec %>
+
+# After how much time should the scheduler terminate in seconds
+# -1 indicates to run continuously (see also num_runs)
+run_duration = <%= @run_duration %>
 
 # Threads count used by scheduler, default: 2
 max_threads = <%= @scheduler_max_threads %>

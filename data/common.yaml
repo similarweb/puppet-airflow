@@ -40,6 +40,7 @@ airflow::authenticate: false
 airflow::auth_backend: null
 airflow::auth_user_registration_role: null
 airflow::filter_by_owner: false
+airflow::log_fetch_timeout_sec: 5
 airflow::smtp_host: 'localhost'
 airflow::smtp_starttls: true
 airflow::smtp_user: 'airflow'
@@ -63,6 +64,7 @@ airflow::job_heartbeat_sec: 5
 airflow::print_stats_interval: 30
 airflow::scheduler_heartbeat_sec: 5
 airflow::scheduler_max_threads: 2
+airflow::run_duration: -1
 airflow::auth_details: {}
 airflow::statsd_settings: {}
 airflow::mesos_settings: {}
