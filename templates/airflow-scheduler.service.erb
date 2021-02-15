@@ -12,7 +12,7 @@ Environment="AIRFLOW_HOME=<%= scope['airflow::home_folder'] %>"
 Environment="AIRFLOW__CORE__LOGGING_LEVEL=<%= scope['airflow::scheduler_log_level'] %>"
 <% end %>
 KillMode=process
-Restart=on-failure
+Restart=<%= scope['airflow::run_duration'] > 0 ? 'always' : 'on-failure' %>
 RestartSec=15s
 User=<%= scope['airflow::user'] %>
 Group=<%= scope['airflow::group'] %>
