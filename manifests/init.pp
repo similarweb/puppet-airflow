@@ -26,6 +26,8 @@
 # [*remote_base_log_folder*]
 #   A remote location can be provided for log backups
 #   For S3, use the full URL to the base folder (starting with "s3://...").
+# [*logging_level*]
+#   Logging level
 # [*executor*]
 #   The executor class that airflow should use, defaults to `CeleryExecutor`.
 # [*sql_alchemy_conn*]
@@ -198,6 +200,7 @@ class airflow (
   $dags_folder,
   $remote_log_conn_id,
   $remote_base_log_folder,
+  $logging_level,
   $executor,
   $sql_alchemy_conn,
   $sql_alchemy_pool_size,
@@ -275,6 +278,7 @@ class airflow (
   validate_string($folders_mode)
   validate_string($flower_url_prefix)
   validate_string($hostname_callable)
+  validate_string($logging_level)
   validate_string($remote_log_conn_id)
   validate_string($remote_base_log_folder)
   validate_string($scheduler_log_level)

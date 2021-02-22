@@ -16,6 +16,9 @@ remote_logging = <%= !@remote_log_conn_id.nil? %>
 remote_log_conn_id = <%= @remote_log_conn_id %>
 remote_base_log_folder = <%= @remote_base_log_folder %>
 
+# Logging level
+logging_level = <%= @logging_level %>
+
 # The executor class that airflow should use. Choices include
 # SequentialExecutor, LocalExecutor, CeleryExecutor, DaskExecutor, KubernetesExecutor
 executor = <%= @executor %>
