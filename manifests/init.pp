@@ -28,6 +28,12 @@
 #   For S3, use the full URL to the base folder (starting with "s3://...").
 # [*logging_level*]
 #   Logging level
+# [*extra_log_config*]
+#   Additional configuration to be set up. Takes a dictionary of formatters,
+#   handlers and loggers.
+#   For documentation see links. Adjust for installed version.
+#   https://airflow.apache.org/docs/apache-airflow/stable/logging-monitoring/logging-tasks.html
+#   https://github.com/apache/airflow/blob/v1-10-stable/airflow/config_templates/airflow_local_settings.py
 # [*executor*]
 #   The executor class that airflow should use, defaults to `CeleryExecutor`.
 # [*sql_alchemy_conn*]
@@ -201,6 +207,7 @@ class airflow (
   $remote_log_conn_id,
   $remote_base_log_folder,
   $logging_level,
+  $extra_log_config,
   $executor,
   $sql_alchemy_conn,
   $sql_alchemy_pool_size,

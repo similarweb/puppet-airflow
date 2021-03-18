@@ -16,6 +16,7 @@ airflow::home_folder: '/opt/airflow'
 airflow::dags_folder: "%{lookup('airflow::home_folder')}/dags"
 airflow::s3_log_folder: 'None'
 airflow::logging_level: 'INFO'
+airflow::extra_log_config: null
 airflow::executor: 'CeleryExecutor'
 airflow::sql_alchemy_conn: "sqlite:////%{lookup('airflow::home_folder')}/airflow.db"
 airflow::sql_alchemy_pool_size: 5

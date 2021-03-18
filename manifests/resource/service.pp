@@ -13,6 +13,10 @@ define airflow::resource::service($service_name = $name) {
     true    => [File["${airflow::home_folder}/webserver_config.py"]],
     default => [],
   }
+  $logging_dependency = $airflow::extra_log_config ? {
+    true    => [File["${airflow::home_folder}/config/log_config.py"]],
+    default => [],
+  }
 
   service { $service_name:
     ensure    => $airflow::service_ensure,
@@ -21,6 +25,6 @@ define airflow::resource::service($service_name = $name) {
     subscribe => [
       Systemd::Unit_file["${service_name}.service"],
       File["${airflow::home_folder}/airflow.cfg"],
-    ] + $auth_dependency
+    ] + $auth_dependency + $logging_dependency
   }
 }

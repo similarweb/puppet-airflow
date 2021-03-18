@@ -42,4 +42,25 @@ class airflow::config inherits airflow {
       require =>  [Class[airflow::install], File[$airflow::home_folder]]
     }
   }
+  if $airflow::extra_log_config {
+    file { "${airflow::home_folder}/config":
+      ensure  => directory,
+      owner   => $airflow::user,
+      group   => $airflow::group,
+      mode    => $airflow::folders_mode,
+      require => File[$airflow::home_folder]
+    }
+    file { "${airflow::home_folder}/config/__init__.py":
+      ensure  => 'file',
+      content => '',
+      mode    => '0755',
+      require =>  File["${airflow::home_folder}/config"]
+    }
+    file { "${airflow::home_folder}/config/log_config.py":
+      ensure  => 'file',
+      content => template("${module_name}/log_config.py.erb"),
+      mode    => '0755',
+      require =>  File["${airflow::home_folder}/config"]
+    }
+  }
 }

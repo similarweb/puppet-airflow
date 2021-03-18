@@ -143,6 +143,33 @@ airflow::mesos_settings:
   default_secret: admin
 
 ```
+
+## Extended Logging Configuration
+
+Logging is configured via a `logging.config` dictionary. 
+As [documented][12], Airflow has an [initial logging configuration][13],
+but when using multiple modules with their own logging sensibilities, it is not enough.
+Some modules set their default logging to debug, which can cause task log sizes to explode into the gigabyte range,
+when logging dumps the contents of transferred files and the like.
+
+* An example using boto3 and s3transfer in hiera.
+
+```yaml
+airflow::extra_log_config:
+  loggers:
+    botocore:
+      level: "WARNING"
+      handlers: ["console"]
+      propagate: false
+    boto3:
+      level: "WARNING"
+      handlers: ["console"]
+      propagate: False
+    s3transfer:
+      level: "WARNING"
+      handlers: ["console"]
+      propagate: False
+```
 ## Reference
 
 ### Classes
@@ -179,3 +206,5 @@ airflow::mesos_settings:
 [9]: http://flask-appbuilder.readthedocs.io/en/latest/security.html#authentication-methods
 [10]: https://github.com/apache/airflow/blob/master/airflow/config_templates/default_webserver_config.py
 [11]: https://airflow.apache.org/security.html#rbac-ui-security
+[12]: https://airflow.apache.org/docs/apache-airflow/stable/logging-monitoring/index.html
+[13]: https://github.com/apache/airflow/blob/master/airflow/config_templates/airflow_local_settings.py
