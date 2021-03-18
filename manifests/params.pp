@@ -25,6 +25,7 @@ class airflow::params {
   $dags_folder                 = "${home_folder}/dags"
   $remote_base_log_folder      = 'None'
   $logging_level               = 'INFO'
+  $extra_log_config            = undef
   $executor                    = 'CeleryExecutor'
   $sql_alchemy_conn            = "sqlite:////${home_folder}/airflow.db"
   $sql_alchemy_pool_size       = 5
