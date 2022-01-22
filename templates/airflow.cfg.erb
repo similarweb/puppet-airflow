@@ -5,27 +5,6 @@
 # This path must be absolute
 dags_folder = <%= @dags_folder %>
 
-# The folder where airflow should store its log files
-# This path must be absolute
-base_log_folder = <%= @log_folder %>
-
-# Airflow can store logs remotely in AWS S3, Google Cloud Storage or Elastic Search.
-# Users must supply an Airflow connection id that provides access to the storage
-# location. See UPDATING.md for additional configuration requirements.
-remote_logging = <%= !@remote_log_conn_id.nil? %>
-remote_log_conn_id = <%= @remote_log_conn_id %>
-remote_base_log_folder = <%= @remote_base_log_folder %>
-<% if @extra_log_config %>
-# Logging class
-# Specify the class that will specify the logging configuration
-# This class has to be on the python classpath
-# Example: logging_config_class = my.path.default_local_settings.LOGGING_CONFIG
-logging_config_class = log_config.LOGGING_CONFIG
-<% end %>
-
-# Logging level
-logging_level = <%= @logging_level %>
-
 # The executor class that airflow should use. Choices include
 # SequentialExecutor, LocalExecutor, CeleryExecutor, DaskExecutor, KubernetesExecutor
 executor = <%= @executor %>
@@ -98,6 +77,28 @@ dagbag_import_timeout = <%= @dagbag_import_timeout %>
 # How long before timing out a DagFileProcessor, which processes a dag file
 dag_file_processor_timeout = <%= @dag_file_processor_timeout %>
 <% end %>
+
+<%= "[logging]" if @version >= '2' %>
+# The folder where airflow should store its log files
+# This path must be absolute
+base_log_folder = <%= @log_folder %>
+
+# Airflow can store logs remotely in AWS S3, Google Cloud Storage or Elastic Search.
+# Users must supply an Airflow connection id that provides access to the storage
+# location. See UPDATING.md for additional configuration requirements.
+remote_logging = <%= !@remote_log_conn_id.nil? %>
+remote_log_conn_id = <%= @remote_log_conn_id %>
+remote_base_log_folder = <%= @remote_base_log_folder %>
+<% if @extra_log_config %>
+# Logging class
+# Specify the class that will specify the logging configuration
+# This class has to be on the python classpath
+# Example: logging_config_class = my.path.default_local_settings.LOGGING_CONFIG
+logging_config_class = log_config.LOGGING_CONFIG
+<% end %>
+
+# Logging level
+logging_level = <%= @logging_level %>
 
 [webserver]
 # The base url of your website as airflow cannot guess what domain or
