@@ -42,10 +42,10 @@ parallelism = <%= @parallelism %>
 
 # The number of task instances allowed to run concurrently by the scheduler
 <% if @version < '2' %>
-dag_concurrency = <%= @dag_concurrency %>
+dag_concurrency = <% @dag_concurrency %>
 <% end %>
 <% if @version >= '2' %>
-max_active_tasks_per_dag = <%= @max_active_tasks_per_dag %>
+max_active_tasks_per_dag = <% @max_active_tasks_per_dag %>
 <% end %>
 
 # The maximum number of active DAG runs per DAG
