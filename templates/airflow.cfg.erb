@@ -41,7 +41,12 @@ sql_alchemy_pool_recycle = <%= @sql_alchemy_pool_recycle %>
 parallelism = <%= @parallelism %>
 
 # The number of task instances allowed to run concurrently by the scheduler
+<% if @version < '2' %>
 dag_concurrency = <%= @dag_concurrency %>
+<% end %>
+<% if @version >= '2' %>
+max_active_tasks_per_dag = <%= @max_active_tasks_per_dag %>
+<% end %>
 
 # The maximum number of active DAG runs per DAG
 max_active_runs_per_dag = <%= @max_active_runs_per_dag %>
@@ -216,6 +221,7 @@ flower_url_prefix = <%= @flower_url_prefix %>
 # This defines the port that Celery Flower runs on
 flower_port = <%= @flower_port %>
 
+<%= "[operators]" if @version >= '2' %>
 # Default queue that tasks get assigned to and that worker listen on.
 default_queue = <%= @default_queue %>
 
@@ -251,6 +257,7 @@ max_threads = <%= @scheduler_max_threads %>
 # DAG definition (catchup)
 catchup_by_default = <%= @catchup %>
 
+<%= "[metrics]" if @version >= '2' %>
 <% if @statsd_settings['statsd_on'] -%>
 # Statsd (https://github.com/etsy/statsd) integration settings
 statsd_on =  <%= @statsd_settings['statsd_on'] %>
