@@ -51,6 +51,8 @@
 #   defaults to `32`.
 # [*dag_concurrency*]
 #   The number of task instances allowed to run concurrently by the scheduler.
+# [*max_active_tasks_per_dag*]
+#   The number of task instances allowed to run concurrently by the scheduler in Airflow2.
 # [*max_active_runs_per_dag*]
 #   The maximum number of active DAG runs per DAG.
 # [*load_examples*]
@@ -215,6 +217,7 @@ class airflow (
   $sql_alchemy_pool_recycle,
   $parallelism,
   $dag_concurrency,
+  $max_active_tasks_per_dag,
   $max_active_runs_per_dag,
   $load_examples,
   $fernet_key,

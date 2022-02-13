@@ -45,7 +45,7 @@ parallelism = <%= @parallelism %>
 dag_concurrency = <%= @dag_concurrency %>
 <% end %>
 <% if @version >= '2' %>
-max_active_tasks_per_dag = <%= @dag_concurrency %>
+max_active_tasks_per_dag = <%= @max_active_tasks_per_dag %>
 <% end %>
 
 # The maximum number of active DAG runs per DAG

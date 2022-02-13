@@ -33,6 +33,8 @@ class airflow::params {
   $sql_alchemy_pool_recycle    = 1800
   $parallelism                 = 32
   $dag_concurrency             = 16
+  # Airflow2 has max_active_tasks_per_dag instead of dag_concurrency
+  $max_active_tasks_per_dag    = 16
   $max_active_runs_per_dag     = 16
   $load_examples               = false
   $plugins_folder              = "${home_folder}/plugins"
