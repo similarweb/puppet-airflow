@@ -9,6 +9,7 @@ dags_folder = <%= @dags_folder %>
 # SequentialExecutor, LocalExecutor, CeleryExecutor, DaskExecutor, KubernetesExecutor
 executor = <%= @executor %>
 
+<% if @version < '2' %>
 # The SqlAlchemy connection string to the metadata database.
 # SqlAlchemy supports many different database engine, more information
 # their website
@@ -34,6 +35,7 @@ sql_alchemy_max_overflow = <%= @sql_alchemy_max_overflow %>
 # not apply to sqlite. If the number of DB connections is ever exceeded,
 # a lower config value will allow the system to recover faster.
 sql_alchemy_pool_recycle = <%= @sql_alchemy_pool_recycle %>
+<% end %>
 
 # The amount of parallelism as a setting to the executor. This defines
 # the max number of task instances that should run simultaneously
@@ -147,6 +149,34 @@ filter_by_owner = <%= @filter_by_owner %>
 
 # Enable werkzeug `ProxyFix` middleware
 enable_proxy_fix = <%= @proxy_fix -%>
+
+<%= "[database]" if @version >= '2' %>
+# The SqlAlchemy connection string to the metadata database.
+# SqlAlchemy supports many different database engine, more information
+# their website
+sql_alchemy_conn = <%= @sql_alchemy_conn %>
+
+# The SqlAlchemy pool size is the maximum number of database connections
+# in the pool. 0 indicates no limit.
+sql_alchemy_pool_size = <%= @sql_alchemy_pool_size %>
+
+# The maximum overflow size of the pool.
+# When the number of checked-out connections reaches the size set in pool_size,
+# additional connections will be returned up to this limit.
+# When those additional connections are returned to the pool, they are disconnected and discarded.
+# It follows then that the total number of simultaneous connections the pool will allow
+# is pool_size + max_overflow,
+# and the total number of "sleeping" connections the pool will allow is pool_size.
+# max_overflow can be set to ``-1`` to indicate no overflow limit;
+# no limit will be placed on the total number of concurrent connections. Defaults to ``10``.
+sql_alchemy_max_overflow = <%= @sql_alchemy_max_overflow %>
+
+# The SqlAlchemy pool recycle is the number of seconds a connection
+# can be idle in the pool before it is invalidated. This config does
+# not apply to sqlite. If the number of DB connections is ever exceeded,
+# a lower config value will allow the system to recover faster.
+sql_alchemy_pool_recycle = <%= @sql_alchemy_pool_recycle %>
+<% end %>
 
 [smtp]
 # If you want airflow to send emails on retries, failure, and you want to
