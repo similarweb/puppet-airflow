@@ -9,7 +9,7 @@ dags_folder = <%= @dags_folder %>
 # SequentialExecutor, LocalExecutor, CeleryExecutor, DaskExecutor, KubernetesExecutor
 executor = <%= @executor %>
 
-<% if @version < '2' %>
+# <% if @version < '2' %> - temporary remove for Airflow 2.3.0
 # The SqlAlchemy connection string to the metadata database.
 # SqlAlchemy supports many different database engine, more information
 # their website
@@ -35,7 +35,7 @@ sql_alchemy_max_overflow = <%= @sql_alchemy_max_overflow %>
 # not apply to sqlite. If the number of DB connections is ever exceeded,
 # a lower config value will allow the system to recover faster.
 sql_alchemy_pool_recycle = <%= @sql_alchemy_pool_recycle %>
-<% end %>
+# <% end %> - temporary remove for Airflow 2.3.0
 
 # The amount of parallelism as a setting to the executor. This defines
 # the max number of task instances that should run simultaneously
