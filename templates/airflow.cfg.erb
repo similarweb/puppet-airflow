@@ -101,7 +101,7 @@ remote_base_log_folder = <%= @remote_base_log_folder %>
 # Specify the class that will specify the logging configuration
 # This class has to be on the python classpath
 # Example: logging_config_class = my.path.default_local_settings.LOGGING_CONFIG
-logging_config_class = log_config.LOGGING_CONFIG
+<%= "logging_config_class = log_config.LOGGING_CONFIG" if @version < '2' %>
 <% end %>
 
 # Logging level
